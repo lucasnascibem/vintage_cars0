@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Catálogo moderno de carros clássicos brasileiros da indústria automobilística. Explore modelos lendários como Fusca, Opala, Corcel e mais.">
+    <title>Catálogo de Carros Antigos Brasileiros</title>
+    
+    <!-- Importação de fonte premium -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- Estilos Incorporados para Carregamento Rápido -->
+    <style>
+        /* Declaração da fonte Dog Days Brush */
+        @font-face {
+            font-family: 'Dog Days Brush';
+            src: url('./fonts/dog-days-brush.otf') format('opentype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        :root {
+            /* Paleta Premium Vintage Dark Mode (Mogno Clássico, Latão & Ouro) */
+            --bg-color: #120e0c; /* Espresso escuro profundo */
+            --text-color: #f3ede2; /* Creme de linho suave */
+            --text-muted: #bdae9c; /* Creme envelhecido suave */
+            --card-bg: #1c1612; /* Fumo de tabaco envelhecido */
+            --card-border: #33261c; /* Borda cor madeira mogno aquecida */
+            --header-bg: #0b0807; /* Café preto absoluto */
+            --btn-bg: rgba(217, 160, 91, 0.08);
+            --btn-hover: rgba(217, 160, 91, 0.16);
+            --btn-text: #ebdcc3;
+            --glow-shadow: rgba(217, 160, 91, 0.04);
+            --focus-ring: #d9a05b; /* Ouro envelhecido / Latão */
+            
+            /* Cores auxiliares vintage */
+            --accent-ochre: #d9a05b;
+            --accent-green: #3e5a4a;
+            --badge-bg: #3e5a4a;
+            --badge-text: #ebdcc3;
+            --inset-border: rgba(217, 160, 91, 0.12);
+            --bg-texture: radial-gradient(circle at center, transparent 40%, rgba(0, 0, 0, 0.4) 100%);
+            --transition-speed: 0.3s;
+        }
+
+        /* Estilo do Modo Claro Conforme Solicitado */
+        body.light-mode {
+            --bg-color: #FAFAF5; /* Fundo do modo claro exato */
+            --text-color: #333330; /* Texto cinza escuro, não preto */
+            --text-muted: #666660; /* Cinza médio para textos secundários */
+            --card-bg: #fdfdfb; /* Creme marfim suave */
+            --card-border: #e2e2d9; /* Papelão envelhecido muito leve */
+            --header-bg: #f3f3eb; /* Palha de latão escovado claro */
+            --btn-bg: rgba(51, 51, 48, 0.06);
+            --btn-hover: rgba(51, 51, 48, 0.12);
+            --btn-text: #333330;
+            --glow-shadow: rgba(184, 82, 51, 0.04);
+            --focus-ring: #c78d38; /* Ocre rico */
+            
+            --accent-ochre: #c78d38;
+            --accent-green: #2a473a;
+            --badge-bg: #2a473a;
+            --badge-text: #FAFAF5;
+            --inset-border: rgba(51, 51, 48, 0.08);
+            --bg-texture: radial-gradient(circle at center, transparent 30%, rgba(47, 32, 21, 0.03) 100%);
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            background-image: var(--bg-texture);
+            color: var(--text-color);
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        h1, h2, h3, .brand p {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* HEADER E NAVEGAÇÃO */
+        .main-header {
+            position: sticky;
+            top: 0;
+            background-color: var(--header-bg);
+            color: var(--text-color);
+            padding: 15px 25px;
+            transition: background-color var(--transition-speed) ease;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+            border-bottom: 1px solid var(--card-border);
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .brand h1 {
+            margin: 0 0 2px 0;
+            font-size: 2.2rem;
+            font-family: 'Dog Days Brush', 'Playfair Display', serif;
+            letter-spacing: 0.5px;
+            line-height: 1;
+        }
+
+        .brand p {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.75;
+            font-style: italic;
+        }
+
+        /* BARRA DE FERRAMENTAS DO HEADER */
+        .header-tools {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* BUSCA COM LUPA ANIMADA */
+        .search-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-input {
+            width: 0;
+            max-width: 0;
+            padding: 8px 0;
+            border: none;
+            background: transparent;
+            color: var(--text-color);
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), max-width 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s;
+            outline: none;
+            border-bottom: 2px solid transparent;
+        }
+
+        /* Expandir a busca ao passar o mouse ou focar no container */
+        .search-container:hover .search-input,
+        .search-container:focus-within .search-input,
+        .search-input:not(:placeholder-shown) {
+            width: 200px;
+            max-width: 200px;
+            padding: 8px 12px 8px 35px;
+            border-bottom-color: var(--focus-ring);
+        }
+
+        .search-icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color);
+            transition: color var(--transition-speed);
+            position: absolute;
+            left: 0;
+            pointer-events: none; /* Apenas visual */
+        }
+
+        .search-container:hover .search-icon-btn,
+        .search-container:focus-within .search-icon-btn {
+            color: var(--focus-ring);
+        }
+
+        .search-icon-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* AUTOCOMPLETE DROPDOWN */
+        .autocomplete-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            max-height: 250px;
+            overflow-y: auto;
+            z-index: 1100;
+            display: none;
+        }
+
+        .autocomplete-item {
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .autocomplete-item:hover {
+            background-color: var(--btn-hover);
+        }
+
+        .autocomplete-name {
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        .autocomplete-year {
+            font-size: 0.8rem;
+            color: var(--accent-ochre);
+            background: var(--btn-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* BOTÕES DE CONTROLE */
+        .tool-btn {
+            background: var(--btn-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            color: var(--text-color);
+            padding: 8px 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: background-color 0.2s, border-color 0.2s, transform 0.1s;
+        }
+
+        .tool-btn:hover {
+            background-color: var(--btn-hover);
+            border-color: var(--focus-ring);
+        }
+
+        .tool-btn:active {
+            transform: scale(0.97);
+        }
+
+        .tool-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* FILTRO DE ANO SECUNDÁRIO (MODO CATEGORIA) */
+        .year-filter-wrapper {
+            display: none; /* Apenas visível quando modo categoria está ativo */
+            animation: fadeIn 0.3s ease forwards;
+        }
+
+        .year-select {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            color: var(--text-color);
+            padding: 8px 12px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            outline: none;
+            cursor: pointer;
+            transition: border-color var(--transition-speed);
+        }
+
+        .year-select:focus {
+            border-color: var(--focus-ring);
+        }
+
+        /* MENU DO TEMA COM SVG */
+        .theme-toggle-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: transform 0.5s ease;
+        }
+
+        .theme-toggle-btn:hover svg {
+            transform: rotate(45deg);
+        }
+
+        /* CONTAINER DOS CARDS */
+        main {
+            max-width: 1200px;
+            margin: 40px auto 100px auto;
+            padding: 0 20px;
+        }
+
+        /* Modo Categoria: agrupamento por Fabricante */
+        .category-group {
+            margin-bottom: 50px;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .category-title {
+            font-size: 2.2rem;
+            color: var(--accent-ochre);
+            border-bottom: 2px dashed var(--card-border);
+            padding-bottom: 8px;
+            margin-bottom: 25px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .category-title::after {
+            content: '';
+            flex-grow: 1;
+            height: 1px;
+            background: transparent;
+        }
+
+        .car-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 35px;
+        }
+
+        /* CARD CARRO */
+        .car {
+            position: relative;
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            overflow: hidden;
+            background-color: var(--card-bg);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease, border-color 0.4s;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        /* Efeito de borda interna retrô refinada */
+        .car::after {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            bottom: 8px;
+            border: 1px solid var(--inset-border);
+            pointer-events: none;
+            border-radius: 12px;
+            transition: border-color var(--transition-speed);
+            z-index: 10;
+        }
+
+        .car:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px var(--glow-shadow);
+            border-color: var(--focus-ring);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* IMAGEM CARRO - Apenas a imagem é clicável */
+        .img-link {
+            display: block;
+            width: 100%;
+            height: 240px;
+            overflow: hidden;
+            background-color: var(--header-bg);
+            border-bottom: 1px solid var(--card-border);
+            position: relative;
+            cursor: pointer;
+            z-index: 20; /* Garante que fique acima da moldura interna */
+        }
+
+        .car img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .img-link:hover img {
+            transform: scale(1.06);
+        }
+
+        /* Overlay ao passar o mouse na foto indicando detalhes */
+        .img-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .img-link:hover .img-overlay {
+            opacity: 1;
+        }
+
+        /* INFO CARRO (Não clicável) */
+        .car-info {
+            padding: 24px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .car-info h2 {
+            margin: 0 0 10px 0;
+            color: var(--text-color);
+            font-family: 'Dog Days Brush', 'Playfair Display', serif;
+            font-size: 2.2rem;
+            line-height: 1.1;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        .car-info .year {
+            align-self: flex-start;
+            background-color: var(--badge-bg);
+            color: var(--badge-text);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 4px;
+            letter-spacing: 1.2px;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            border: 1px dashed rgba(255, 255, 255, 0.2);
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.15), 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .car-info p {
+            margin: 0;
+            color: var(--text-color);
+            opacity: 0.85;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* MENSAGEM DE ERRO/SEM RESULTADOS */
+        .no-results {
+            text-align: center;
+            padding: 50px 20px;
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            grid-column: 1 / -1;
+            animation: fadeIn 0.4s ease;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background-color: var(--header-bg);
+            color: var(--text-color);
+            width: 100%;
+            border-top: 1px solid var(--card-border);
+            font-size: 0.9rem;
+            opacity: 0.75;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Principal -->
+    <header class="main-header">
+        <div class="header-content">
+            <!-- Título e Slogan Vintage -->
+            <div class="brand">
+                <h1>Clássicos Brasileiros</h1>
+                <p>A elegância imortal da nossa indústria</p>
+            </div>
+
+            <!-- Ferramentas e Opções de Filtro/Tema -->
+            <div class="header-tools">
+                <!-- Busca com Ícone Expansível -->
+                <div class="search-container">
+                    <button class="search-icon-btn" aria-label="Buscar">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </button>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Buscar por modelo ou ano..." autocomplete="off">
+                    <div id="autocompleteDropdown" class="autocomplete-dropdown"></div>
+                </div>
+
+                <!-- Botão de Modo Categoria -->
+                <button id="categoryModeBtn" class="tool-btn" title="Agrupar por Fabricante">
+                    <!-- Ícone de Grid/Categoria -->
+                    <svg viewBox="0 0 24 24">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
+                    <span>Categorias</span>
+                </button>
+
+                <!-- Filtro Secundário de Ano (Aparece no Modo Categoria) -->
+                <div id="yearFilterWrapper" class="year-filter-wrapper">
+                    <select id="yearSelect" class="year-select" aria-label="Filtrar por Ano">
+                        <option value="">Todos os Anos</option>
+                    </select>
+                </div>
+
+                <!-- Botão de Modo Escuro/Claro (SVG) -->
+                <button id="themeToggleBtn" class="theme-toggle-btn tool-btn" aria-label="Alternar Tema" title="Alternar Tema Escuro/Claro">
+                    <!-- O ícone SVG do sol/lua será injetado dinamicamente via JS -->
+                    <span id="themeIconContainer"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Área de Exibição do Catálogo -->
+    <main>
+        <div id="catalogContainer">
+            <!-- Grid de carros ou seções por Fabricante serão injetados dinamicamente -->
+        </div>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2026 Clássicos Brasileiros. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Inclusão do Banco de Dados Compartilhado -->
+    <script src="./js/db.js"></script>
+
+    <!-- Lógica de Controle do Catálogo -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Garante resiliência total caso o arquivo js/db.js falhe em carregar em ambientes locais restritivos
+            const database = window.carros || (typeof carros !== 'undefined' ? carros : null) || {
+                fusca: {
+                    nome: 'Volkswagen Fusca',
+                    ano: '1959-1986',
+                    fabricante: 'Volkswagen',
+                    descCurta: 'O ícone absoluto da indústria automobilística brasileira, lembrado por sua durabilidade mecânica e simplicidade.',
+                    desc: 'O Fusca começou a ser montado no Brasil in 1953, com peças importadas, mas em 1959 passou a ser fabricado nacionalmente. Tornou-se o carro mais vendido do país por décadas, sendo um símbolo de resistência, simplicidade e praticidade que moldou o trânsito nacional.',
+                    fotos: ['./imagens/fusca.webp'],
+                    tecnicos: { motor: 'Boxer 1300/1500/1600 (Ar)', potencia: '46 a 65 cv', cambio: 'Manual de 4 marchas' }
+                },
+                opala: {
+                    nome: 'Chevrolet Opala',
+                    ano: '1968-1992',
+                    fabricante: 'Chevrolet',
+                    descCurta: 'O Opala marcou gerações no Brasil. Com design incrivelmente elegante, tornou-se o maior ícone esportivo da GM.',
+                    desc: 'Apresentado no Salão do Automóvel de 1968, o Opala mesclava a carroceria do Opel Rekord europeu com a mecânica consagrada do Chevrolet Nova americano. Foi o sedã e cupê de luxo mais desejado, respeitado e bem-sucedido de sua época.',
+                    fotos: ['./imagens/opala_1978.webp'],
+                    tecnicos: { motor: '4 cilindros (2.5) ou 6 cilindros (4.1)', potencia: 'Até 171 cv (SS)', cambio: 'Manual de 3/4 marchas ou Automático' }
+                },
+                corcel: {
+                    nome: 'Ford Corcel',
+                    ano: '1968-1986',
+                    fabricante: 'Ford',
+                    descCurta: 'Hatchback compacto da Ford de imenso sucesso, muito aclamado por seu consumo econômico de combustível.',
+                    desc: 'Herdado da aquisição da Willys Overland do Brasil pela Ford, o projeto originalmente era da Renault. Lançado em 1968, o Corcel inovou trazendo tração dianteira, segurança exemplar e um rodar silencioso e confortável que cativou as famílias brasileiras.',
+                    fotos: ['./imagens/corcel.jpg.webp'],
+                    tecnicos: { motor: '1.3, 1.4 e 1.6 (CHT)', potencia: '68 a 90 cv', cambio: 'Manual de 4 ou 5 marchas' }
+                }
+            };
+
+            // Referências dos Elementos da Página
+            const body = document.body;
+            const catalogContainer = document.getElementById('catalogContainer');
+            const searchInput = document.getElementById('searchInput');
+            const autocompleteDropdown = document.getElementById('autocompleteDropdown');
+            const categoryModeBtn = document.getElementById('categoryModeBtn');
+            const yearFilterWrapper = document.getElementById('yearFilterWrapper');
+            const yearSelect = document.getElementById('yearSelect');
+            const themeToggleBtn = document.getElementById('themeToggleBtn');
+            const themeIconContainer = document.getElementById('themeIconContainer');
+
+            // Estados da Aplicação
+            let buscaAtual = '';
+            let modoCategoriaAtivo = false;
+            let anoSelecionado = '';
+
+
+            // Icones SVG para Temas
+            const svgSol = `
+                <svg viewBox="0 0 24 24" id="sunIcon">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+            `;
+
+            const svgLua = `
+                <svg viewBox="0 0 24 24" id="moonIcon">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            `;
+
+            /**
+             * GERENCIAMENTO DE TEMA (DARK/LIGHT)
+             * Salva e recupera a preferência no localStorage do navegador.
+             */
+            function atualizarIconeTema(isLight) {
+                themeIconContainer.innerHTML = isLight ? svgLua : svgSol;
+                themeToggleBtn.setAttribute('title', isLight ? 'Modo Escuro' : 'Modo Claro');
+            }
+
+            function carregarTema() {
+                const temaSalvo = localStorage.getItem('vintageTheme');
+                if (temaSalvo === 'light') {
+                    body.classList.add('light-mode');
+                    atualizarIconeTema(true);
+                } else {
+                    body.classList.remove('light-mode');
+                    atualizarIconeTema(false);
+                }
+            }
+
+            themeToggleBtn.addEventListener('click', () => {
+                const mudandoParaClaro = !body.classList.contains('light-mode');
+                body.classList.toggle('light-mode', mudandoParaClaro);
+                localStorage.setItem('vintageTheme', mudandoParaClaro ? 'light' : 'dark');
+                atualizarIconeTema(mudandoParaClaro);
+            });
+
+            // Carrega o tema imediatamente
+            carregarTema();
+
+            /**
+             * POPULAR FILTRO DE ANOS DISPONÍVEIS
+             * Analisa os anos de todos os carros cadastrados para construir o dropdown.
+             */
+            function preencherFiltroAnos() {
+                const anosSet = new Set();
+                
+                Object.values(database).forEach(carro => {
+                    // Extrai anos se for um intervalo ou apenas o ano único
+                    const partes = carro.ano.split('-');
+                    partes.forEach(anoStr => {
+                        const anoVal = parseInt(anoStr.trim());
+                        if (!isNaN(anoVal)) anosSet.add(anoVal);
+                    });
+                });
+
+                // Ordena os anos em ordem decrescente
+                const anosOrdenados = Array.from(anosSet).sort((a, b) => b - a);
+
+                // Adiciona as opções no select
+                anosOrdenados.forEach(ano => {
+                    const opt = document.createElement('option');
+                    opt.value = ano;
+                    opt.textContent = ano;
+                    yearSelect.appendChild(opt);
+                });
+            }
+            preencherFiltroAnos();
+
+            /**
+             * SISTEMA DE BUSCA E AUTOCOMPLETE
+             * Filtra dinamicamente as sugestões com base no termo digitado.
+             */
+            function mostrarAutocomplete(termo) {
+                if (!termo) {
+                    autocompleteDropdown.style.display = 'none';
+                    return;
+                }
+
+                const termoLimpo = termo.toLowerCase();
+                const sugestoes = Object.entries(database).filter(([id, carro]) => {
+                    return carro.nome.toLowerCase().includes(termoLimpo) || 
+                           carro.ano.includes(termoLimpo);
+                }).slice(0, 5); // Limita em 5 sugestões
+
+                if (sugestoes.length === 0) {
+                    autocompleteDropdown.style.display = 'none';
+                    return;
+                }
+
+                autocompleteDropdown.innerHTML = '';
+                sugestoes.forEach(([id, carro]) => {
+                    const item = document.createElement('div');
+                    item.className = 'autocomplete-item';
+                    item.innerHTML = `
+                        <span class="autocomplete-name">${carro.nome}</span>
+                        <span class="autocomplete-year">${carro.ano}</span>
+                    `;
+                    item.addEventListener('click', () => {
+                        searchInput.value = carro.nome;
+                        buscaAtual = carro.nome;
+                        autocompleteDropdown.style.display = 'none';
+                        renderizarCatalogo();
+                    });
+                    autocompleteDropdown.appendChild(item);
+                });
+
+                autocompleteDropdown.style.display = 'block';
+            }
+
+            searchInput.addEventListener('input', (e) => {
+                buscaAtual = e.target.value;
+                mostrarAutocomplete(buscaAtual);
+                renderizarCatalogo();
+            });
+
+            // Fecha o autocomplete ao clicar fora
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.search-container')) {
+                    autocompleteDropdown.style.display = 'none';
+                }
+            });
+
+            /**
+             * MODO CATEGORIA
+             * Alterna o agrupamento por fabricante e a visibilidade do filtro de ano secundário.
+             */
+            categoryModeBtn.addEventListener('click', () => {
+                modoCategoriaAtivo = !modoCategoriaAtivo;
+                
+                // Atualiza visual do botão
+                categoryModeBtn.classList.toggle('active', modoCategoriaAtivo);
+                if (modoCategoriaAtivo) {
+                    categoryModeBtn.style.borderColor = 'var(--focus-ring)';
+                    categoryModeBtn.style.backgroundColor = 'var(--btn-hover)';
+                    yearFilterWrapper.style.display = 'block';
+                } else {
+                    categoryModeBtn.style.borderColor = 'var(--card-border)';
+                    categoryModeBtn.style.backgroundColor = 'var(--btn-bg)';
+                    yearFilterWrapper.style.display = 'none';
+                    yearSelect.value = '';
+                    anoSelecionado = '';
+                }
+
+                renderizarCatalogo();
+            });
+
+            yearSelect.addEventListener('change', (e) => {
+                anoSelecionado = e.target.value;
+                renderizarCatalogo();
+            });
+
+            /**
+             * RENDERIZAR CARD INDIVIDUAL
+             * Cria o elemento HTML de cada card de carro obedecendo a regra:
+             * Apenas a imagem é clicável e redireciona para detalhes.html?carro=ID.
+             */
+            function criarCardCarro(id, carro, index) {
+                const delay = (index * 0.05).toFixed(2);
+                const article = document.createElement('article');
+                article.className = 'car';
+                article.style.animationDelay = `${delay}s`;
+
+                // fotos[0] do db.js contém o caminho correto sem o "./"
+                const imagemSrc = carro.fotos[0];
+
+                article.innerHTML = `
+                    <a href="detalhes.html?carro=${id}" class="img-link" title="Ver Detalhes de ${carro.nome}">
+                        <img src="${imagemSrc}" alt="${carro.nome}" loading="lazy">
+                        <div class="img-overlay">Ver Detalhes</div>
+                    </a>
+                    <div class="car-info">
+                        <h2>${carro.nome}</h2>
+                        <div class="year">${carro.ano}</div>
+                        <p>${carro.descCurta}</p>
+                    </div>
+                `;
+                return article;
+            }
+
+            /**
+             * FILTRAR VEÍCULOS
+             * Aplica as regras de Busca e de Filtro por Ano.
+             */
+            function filtrarCarros() {
+                return Object.entries(database).filter(([id, carro]) => {
+                    // Filtro de Busca (Nome / Ano)
+                    const bateBusca = !buscaAtual || 
+                                     carro.nome.toLowerCase().includes(buscaAtual.toLowerCase()) ||
+                                     carro.ano.includes(buscaAtual);
+
+                    // Filtro de Ano (Quando modo categoria está ativo)
+                    let bateAno = true;
+                    if (modoCategoriaAtivo && anoSelecionado) {
+                        const anoInt = parseInt(anoSelecionado);
+                        const partes = carro.ano.split('-');
+                        if (partes.length === 2) {
+                            const inicio = parseInt(partes[0].trim());
+                            const fim = parseInt(partes[1].trim());
+                            bateAno = (anoInt >= inicio && anoInt <= fim);
+                        } else {
+                            const unico = parseInt(partes[0].trim());
+                            bateAno = (anoInt === unico);
+                        }
+                    }
+
+                    return bateBusca && bateAno;
+                });
+            }
+
+            /**
+             * RENDERIZAR CATÁLOGO COMPLETO
+             * Monta o grid regular ou agrupa em seções no Modo Categoria.
+             */
+            function renderizarCatalogo() {
+                catalogContainer.innerHTML = '';
+                const carrosFiltrados = filtrarCarros();
+
+                if (carrosFiltrados.length === 0) {
+                    catalogContainer.innerHTML = `
+                        <div class="no-results">
+                            Nenhum clássico encontrado para a combinação de filtros.
+                        </div>
+                    `;
+                    return;
+                }
+
+                if (modoCategoriaAtivo) {
+                    // Agrupar por fabricante
+                    const grupos = {};
+                    carrosFiltrados.forEach(([id, carro]) => {
+                        const fabricante = carro.fabricante || 'Outros';
+                        if (!grupos[fabricante]) grupos[fabricante] = [];
+                        grupos[fabricante].push({ id, carro });
+                    });
+
+                    // Renderizar cada seção de fabricante
+                    Object.entries(grupos).sort().forEach(([fabricante, listaCarros]) => {
+                        const section = document.createElement('section');
+                        section.className = 'category-group';
+
+                        const title = document.createElement('h2');
+                        title.className = 'category-title';
+                        title.textContent = fabricante;
+                        section.appendChild(title);
+
+                        const grid = document.createElement('div');
+                        grid.className = 'car-grid';
+
+                        listaCarros.forEach((item, index) => {
+                            grid.appendChild(criarCardCarro(item.id, item.carro, index));
+                        });
+
+                        section.appendChild(grid);
+                        catalogContainer.appendChild(section);
+                    });
+                } else {
+                    // Modo Normal (Grid unificado e fluido)
+                    const grid = document.createElement('div');
+                    grid.className = 'car-grid';
+
+                    carrosFiltrados.forEach(([id, carro], index) => {
+                        grid.appendChild(criarCardCarro(id, carro, index));
+                    });
+
+                    catalogContainer.appendChild(grid);
+                }
+            }
+
+            // Primeira renderização da página
+            renderizarCatalogo();
+        });
+    </script>
+</body>
+
+</html>

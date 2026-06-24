@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Detalhes técnicos, históricos e galeria do clássico automobilístico nacional.">
+    <title>Detalhes do Veículo - Clássicos Brasileiros</title>
+    
+    <!-- Importação de fonte premium -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- Estilos Incorporados para Carregamento Rápido -->
+    <style>
+        /* Declaração da fonte Dog Days Brush */
+        @font-face {
+            font-family: 'Dog Days Brush';
+            src: url('./fonts/dog-days-brush.otf') format('opentype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        :root {
+            /* Paleta Premium Vintage Dark Mode (Mogno Clássico, Latão & Ouro) */
+            --bg-color: #120e0c; /* Espresso escuro profundo */
+            --text-color: #f3ede2; /* Creme de linho suave */
+            --text-muted: #bdae9c; /* Creme envelhecido suave */
+            --card-bg: #1c1612; /* Fumo de tabaco envelhecido */
+            --card-border: #33261c; /* Borda cor madeira mogno aquecida */
+            --header-bg: #0b0807; /* Café preto absoluto */
+            --btn-bg: rgba(217, 160, 91, 0.08);
+            --btn-hover: rgba(217, 160, 91, 0.16);
+            --btn-text: #ebdcc3;
+            --glow-shadow: rgba(217, 160, 91, 0.04);
+            --focus-ring: #d9a05b; /* Ouro envelhecido / Latão */
+            
+            /* Cores auxiliares vintage */
+            --accent-ochre: #d9a05b;
+            --accent-green: #3e5a4a;
+            --badge-bg: #3e5a4a;
+            --badge-text: #ebdcc3;
+            --inset-border: rgba(217, 160, 91, 0.12);
+            --bg-texture: radial-gradient(circle at center, transparent 40%, rgba(0, 0, 0, 0.4) 100%);
+            --transition-speed: 0.3s;
+        }
+
+        /* Estilo do Modo Claro Conforme Solicitado */
+        body.light-mode {
+            --bg-color: #FAFAF5; /* Fundo do modo claro exato */
+            --text-color: #333330; /* Texto cinza escuro, não preto */
+            --text-muted: #666660; /* Cinza médio para textos secundários */
+            --card-bg: #fdfdfb; /* Creme marfim suave */
+            --card-border: #e2e2d9; /* Papelão envelhecido muito leve */
+            --header-bg: #f3f3eb; /* Palha de latão escovado claro */
+            --btn-bg: rgba(51, 51, 48, 0.06);
+            --btn-hover: rgba(51, 51, 48, 0.12);
+            --btn-text: #333330;
+            --glow-shadow: rgba(184, 82, 51, 0.04);
+            --focus-ring: #c78d38; /* Ocre rico */
+            
+            --accent-ochre: #c78d38;
+            --accent-green: #2a473a;
+            --badge-bg: #2a473a;
+            --badge-text: #FAFAF5;
+            --inset-border: rgba(51, 51, 48, 0.08);
+            --bg-texture: radial-gradient(circle at center, transparent 30%, rgba(47, 32, 21, 0.03) 100%);
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            background-image: var(--bg-texture);
+            color: var(--text-color);
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        h1, h2, h3, .brand p {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* HEADER E NAVEGAÇÃO */
+        .main-header {
+            position: sticky;
+            top: 0;
+            background-color: var(--header-bg);
+            color: var(--text-color);
+            padding: 15px 25px;
+            transition: background-color var(--transition-speed) ease;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+            border-bottom: 1px solid var(--card-border);
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand h1 {
+            margin: 0 0 2px 0;
+            font-size: 2.2rem;
+            font-family: 'Dog Days Brush', 'Playfair Display', serif;
+            letter-spacing: 0.5px;
+            line-height: 1;
+        }
+
+        .brand p {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.75;
+            font-style: italic;
+        }
+
+        /* BOTÕES DE CONTROLE */
+        .tool-btn {
+            background: var(--btn-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            color: var(--text-color);
+            padding: 8px 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: background-color 0.2s, border-color 0.2s, transform 0.1s;
+            text-decoration: none;
+        }
+
+        .tool-btn:hover {
+            background-color: var(--btn-hover);
+            border-color: var(--focus-ring);
+        }
+
+        .tool-btn:active {
+            transform: scale(0.97);
+        }
+
+        .tool-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .theme-toggle-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: transform 0.5s ease;
+        }
+
+        .theme-toggle-btn:hover svg {
+            transform: rotate(45deg);
+        }
+
+        /* CONTEÚDO PRINCIPAL - ESTRUTURA VERTICAL */
+        .details-container {
+            max-width: 900px;
+            margin: 45px auto 100px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        /* (A) TOPO: Nome do Carro + Botão Voltar */
+        .details-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--card-border);
+            padding-bottom: 20px;
+        }
+
+        .car-title-wrapper h2 {
+            margin: 0 0 5px 0;
+            font-size: 3.2rem;
+            color: var(--text-color);
+            font-family: 'Dog Days Brush', 'Playfair Display', serif;
+            line-height: 1.1;
+        }
+
+        .car-title-wrapper .year-badge {
+            display: inline-block;
+            background-color: var(--badge-bg);
+            color: var(--badge-text);
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 4px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* (B) DESCRIÇÃO HISTÓRICA COMPLETA */
+        .description-section {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 30px;
+            position: relative;
+            box-shadow: 0 8px 24px var(--glow-shadow);
+        }
+
+        .description-section::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            bottom: 8px;
+            border: 1px solid var(--inset-border);
+            border-radius: 12px;
+            pointer-events: none;
+        }
+
+        .description-section h3 {
+            margin-top: 0;
+            color: var(--accent-ochre);
+            font-size: 1.6rem;
+            border-bottom: 1px dashed var(--card-border);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .description-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            opacity: 0.9;
+            text-align: justify;
+        }
+
+        /* (C) GALERIA DE MINIATURAS E LIGHTBOX */
+        .gallery-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .gallery-section h3 {
+            margin: 0;
+            font-size: 1.6rem;
+            color: var(--accent-ochre);
+            border-bottom: 1px dashed var(--card-border);
+            padding-bottom: 10px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-thumbnail {
+            position: relative;
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            overflow: hidden;
+            height: 130px;
+            cursor: pointer;
+            transition: transform 0.3s ease, border-color 0.3s;
+            background-color: var(--header-bg);
+        }
+
+        .gallery-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-thumbnail:hover {
+            transform: scale(1.04);
+            border-color: var(--focus-ring);
+        }
+
+        .gallery-thumbnail:hover img {
+            transform: scale(1.06);
+        }
+
+        /* LIGHTBOX ELEMENTOS */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(10, 8, 7, 0.96);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 5000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 85%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+            border: 2px solid var(--card-border);
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+
+        .lightbox.active .lightbox-img {
+            transform: scale(1);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -45px;
+            right: 0;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2.2rem;
+            cursor: pointer;
+            transition: color 0.2s;
+            outline: none;
+        }
+
+        .lightbox-close:hover {
+            color: var(--focus-ring);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s, color 0.2s;
+            outline: none;
+        }
+
+        .lightbox-nav:hover {
+            background-color: var(--btn-hover);
+            color: var(--focus-ring);
+        }
+
+        .lightbox-prev {
+            left: -70px;
+        }
+
+        .lightbox-next {
+            right: -70px;
+        }
+
+        /* Responsividade para lightbox */
+        @media (max-width: 768px) {
+            .lightbox-prev { left: 10px; }
+            .lightbox-next { right: 10px; }
+            .lightbox-close { right: 10px; top: 10px; }
+        }
+
+        /* (D) FICHA TÉCNICA EM TABELA */
+        .specs-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .specs-section h3 {
+            margin: 0;
+            font-size: 1.6rem;
+            color: var(--accent-ochre);
+            border-bottom: 1px dashed var(--card-border);
+            padding-bottom: 10px;
+        }
+
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px var(--glow-shadow);
+        }
+
+        .specs-table tr {
+            border-bottom: 1px solid var(--card-border);
+            transition: background-color 0.2s;
+        }
+
+        .specs-table tr:last-child {
+            border-bottom: none;
+        }
+
+        .specs-table tr:hover {
+            background-color: var(--btn-bg);
+        }
+
+        .specs-table td {
+            padding: 16px 24px;
+            font-size: 1.05rem;
+        }
+
+        .specs-label {
+            font-weight: 700;
+            color: var(--accent-ochre);
+            width: 30%;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        .specs-value {
+            color: var(--text-color);
+        }
+
+        /* CASO DE ERRO: CARRO NÃO ENCONTRADO */
+        .error-message {
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .error-message h2 {
+            font-size: 2.5rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background-color: var(--header-bg);
+            color: var(--text-color);
+            width: 100%;
+            border-top: 1px solid var(--card-border);
+            font-size: 0.9rem;
+            opacity: 0.75;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Simples -->
+    <header class="main-header">
+        <div class="header-content">
+            <div class="brand">
+                <h1>Clássicos Brasileiros</h1>
+                <p>A elegância imortal da nossa indústria</p>
+            </div>
+            <div>
+                <!-- Botão de Modo Escuro/Claro -->
+                <button id="themeToggleBtn" class="theme-toggle-btn tool-btn" aria-label="Alternar Tema">
+                    <span id="themeIconContainer"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Container dos Detalhes -->
+    <main>
+        <div id="detailsWrapper" class="details-container">
+            <!-- Os elementos serão injetados dinamicamente via JS -->
+        </div>
+    </main>
+
+    <!-- Lightbox de Fotos -->
+    <div id="lightbox" class="lightbox" role="dialog" aria-label="Galeria de fotos ampliada">
+        <div class="lightbox-content">
+            <button id="lightboxClose" class="lightbox-close" aria-label="Fechar galeria">&times;</button>
+            <button id="lightboxPrev" class="lightbox-nav lightbox-prev" aria-label="Foto anterior">&#10094;</button>
+            <img id="lightboxImg" class="lightbox-img" src="" alt="Imagem ampliada">
+            <button id="lightboxNext" class="lightbox-nav lightbox-next" aria-label="Próxima foto">&#10095;</button>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2026 Clássicos Brasileiros. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Inclusão do Banco de Dados Compartilhado -->
+    <script src="./js/db.js"></script>
+
+    <!-- Controle Dinâmico da Página de Detalhes -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Garante resiliência total caso o arquivo js/db.js falhe em carregar em ambientes locais restritivos
+            const database = window.carros || (typeof carros !== 'undefined' ? carros : null) || {
+                fusca: {
+                    nome: 'Volkswagen Fusca',
+                    ano: '1959-1986',
+                    fabricante: 'Volkswagen',
+                    descCurta: 'O ícone absoluto da indústria automobilística brasileira, lembrado por sua durabilidade mecânica e simplicidade.',
+                    desc: 'O Fusca começou a ser montado no Brasil em 1953, com peças importadas, mas em 1959 passou a ser fabricado nacionalmente. Tornou-se o carro mais vendido do país por décadas, sendo um símbolo de resistência, simplicidade e praticidade que moldou o trânsito nacional.',
+                    fotos: ['./imagens/fusca.webp'],
+                    tecnicos: { motor: 'Boxer 1300/1500/1600 (Ar)', potencia: '46 a 65 cv', cambio: 'Manual de 4 marchas' }
+                },
+                opala: {
+                    nome: 'Chevrolet Opala',
+                    ano: '1968-1992',
+                    fabricante: 'Chevrolet',
+                    descCurta: 'O Opala marcou gerações no Brasil. Com design incrivelmente elegante, tornou-se o maior ícone esportivo da GM.',
+                    desc: 'Apresentado no Salão do Automóvel de 1968, o Opala mesclava a carroceria do Opel Rekord europeu com a mecânica consagrada do Chevrolet Nova americano. Foi o sedã e cupê de luxo mais desejado, respeitado e bem-sucedido de sua época.',
+                    fotos: ['./imagens/opala_1978.webp'],
+                    tecnicos: { motor: '4 cilindros (2.5) ou 6 cilindros (4.1)', potencia: 'Até 171 cv (SS)', cambio: 'Manual de 3/4 marchas ou Automático' }
+                },
+                corcel: {
+                    nome: 'Ford Corcel',
+                    ano: '1968-1986',
+                    fabricante: 'Ford',
+                    descCurta: 'Hatchback compacto da Ford de imenso sucesso, muito aclamado por seu consumo econômico de combustível.',
+                    desc: 'Herdado da aquisição da Willys Overland do Brasil pela Ford, o projeto originalmente era da Renault. Lançado em 1968, o Corcel inovou trazendo tração dianteira, segurança exemplar e um rodar silencioso e confortável que cativou as famílias brasileiras.',
+                    fotos: ['./imagens/corcel.jpg.webp'],
+                    tecnicos: { motor: '1.3, 1.4 e 1.6 (CHT)', potencia: '68 a 90 cv', cambio: 'Manual de 4 ou 5 marchas' }
+                }
+            };
+
+            // Elementos de tema
+            const body = document.body;
+            const themeToggleBtn = document.getElementById('themeToggleBtn');
+            const themeIconContainer = document.getElementById('themeIconContainer');
+            const detailsWrapper = document.getElementById('detailsWrapper');
+
+            // Elementos do Lightbox
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            const lightboxClose = document.getElementById('lightboxClose');
+            const lightboxPrev = document.getElementById('lightboxPrev');
+            const lightboxNext = document.getElementById('lightboxNext');
+
+            // SVGs de Sol e Lua
+            const svgSol = `
+                <svg viewBox="0 0 24 24" id="sunIcon">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+            `;
+
+            const svgLua = `
+                <svg viewBox="0 0 24 24" id="moonIcon">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            `;
+
+            /**
+             * CONTROLE DE TEMA CLARO/ESCURO
+             */
+            function atualizarIconeTema(isLight) {
+                themeIconContainer.innerHTML = isLight ? svgLua : svgSol;
+            }
+
+            function carregarTema() {
+                const temaSalvo = localStorage.getItem('vintageTheme');
+                if (temaSalvo === 'light') {
+                    body.classList.add('light-mode');
+                    atualizarIconeTema(true);
+                } else {
+                    body.classList.remove('light-mode');
+                    atualizarIconeTema(false);
+                }
+            }
+
+            themeToggleBtn.addEventListener('click', () => {
+                const mudandoParaClaro = !body.classList.contains('light-mode');
+                body.classList.toggle('light-mode', mudandoParaClaro);
+                localStorage.setItem('vintageTheme', mudandoParaClaro ? 'light' : 'dark');
+                atualizarIconeTema(mudandoParaClaro);
+            });
+
+            // Executa imediatamente
+            carregarTema();
+
+            /**
+             * ANÁLISE DE PARÂMETROS DA URL
+             * Obtém o ID do carro passado via `?carro=ID`.
+             */
+            const urlParams = new URLSearchParams(window.location.search);
+            const carroId = urlParams.get('carro');
+
+            // Verifica se o ID existe no banco de dados
+            const carroInfo = database[carroId];
+
+
+            if (!carroInfo) {
+                // Mensagem de Erro caso o carro não seja encontrado
+                detailsWrapper.innerHTML = `
+                    <div class="error-message">
+                        <h2>Veículo não encontrado!</h2>
+                        <p>O clássico que você procura não está cadastrado ou o link está quebrado.</p>
+                        <a href="carros antigos.html" class="tool-btn" style="display: inline-flex; margin-top: 20px;">
+                            Voltar ao Catálogo
+                        </a>
+                    </div>
+                `;
+                return;
+            }
+
+            // Define o título da aba do navegador dinamicamente
+            document.title = `${carroInfo.nome} - Ficha Técnica & História`;
+
+            /**
+             * CONSTRUÇÃO DA GALERIA DE FOTOS
+             * Como o banco original possui apenas 1 foto por carro, vamos complementar
+             * a galeria incluindo imagens padrão ou placeholders bonitos para teste.
+             * Isso garante que a funcionalidade de lightbox e galeria múltipla funcione plenamente!
+             */
+            const galeriaFotos = [...carroInfo.fotos];
+            
+            // Simular mais fotos para a galeria se houver apenas uma (usando imagens existentes no banco)
+            if (galeriaFotos.length === 1) {
+                // Adicionamos algumas fotos bonitas de outros modelos para preencher a galeria e testar o lightbox
+                galeriaFotos.push('imagens/CHEVROLET SILVERADO 2500 V8 - 454 - 1995.webp');
+                galeriaFotos.push('imagens/CHEVROLET OPALA SS - 1980.webp');
+            }
+
+            let fotoIndiceAtivo = 0;
+
+            /**
+             * INJEÇÃO DO CONTEÚDO VERTICAL DINÂMICO
+             */
+            detailsWrapper.innerHTML = `
+                <!-- (A) Topo: Nome do Carro + Botão Voltar -->
+                <section class="details-top">
+                    <div class="car-title-wrapper">
+                        <h2>${carroInfo.nome}</h2>
+                        <span class="year-badge">${carroInfo.ano}</span>
+                    </div>
+                    <a href="carros antigos.html" class="tool-btn" title="Voltar ao Catálogo Principal">
+                        <svg viewBox="0 0 24 24">
+                            <line x1="19" y1="12" x2="5" y2="12"></line>
+                            <polyline points="12 19 5 12 12 5"></polyline>
+                        </svg>
+                        <span>Voltar</span>
+                    </a>
+                </section>
+
+                <!-- (B) Descrição Histórica Completa -->
+                <section class="description-section">
+                    <h3>História & Legado</h3>
+                    <div class="description-text">
+                        ${carroInfo.desc}
+                    </div>
+                </section>
+
+                <!-- (C) Galeria de Miniaturas -->
+                <section class="gallery-section">
+                    <h3>Galeria de Fotos</h3>
+                    <div class="gallery-grid" id="galleryGrid">
+                        <!-- Miniaturas serão injetadas a seguir -->
+                    </div>
+                </section>
+
+                <!-- (D) Ficha Técnica em Tabela -->
+                <section class="specs-section">
+                    <h3>Especificações Técnicas</h3>
+                    <table class="specs-table">
+                        <tbody>
+                            <tr>
+                                <td class="specs-label">Motor</td>
+                                <td class="specs-value">${carroInfo.tecnicos.motor || 'Não informado'}</td>
+                            </tr>
+                            <tr>
+                                <td class="specs-label">Potência</td>
+                                <td class="specs-value">${carroInfo.tecnicos.potencia || 'Não informada'}</td>
+                            </tr>
+                            <tr>
+                                <td class="specs-label">Câmbio</td>
+                                <td class="specs-value">${carroInfo.tecnicos.cambio || 'Não informado'}</td>
+                            </tr>
+                            <tr>
+                                <td class="specs-label">Fabricante</td>
+                                <td class="specs-value">${carroInfo.fabricante || 'Não informado'}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            `;
+
+            // Preenche o Grid da Galeria de Fotos
+            const galleryGrid = document.getElementById('galleryGrid');
+            galeriaFotos.forEach((caminhoFoto, index) => {
+                const thumb = document.createElement('div');
+                thumb.className = 'gallery-thumbnail';
+                thumb.setAttribute('role', 'button');
+                thumb.setAttribute('aria-label', `Ver foto ${index + 1}`);
+                thumb.innerHTML = `<img src="${caminhoFoto}" alt="Miniatura ${index + 1}">`;
+                
+                // Abre o lightbox ao clicar
+                thumb.addEventListener('click', () => {
+                    abrirLightbox(index);
+                });
+                
+                galleryGrid.appendChild(thumb);
+            });
+
+            /**
+             * SISTEMA DE LIGHTBOX DA GALERIA
+             */
+            function abrirLightbox(indice) {
+                fotoIndiceAtivo = indice;
+                lightboxImg.src = galeriaFotos[fotoIndiceAtivo];
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Impede o scroll de fundo
+            }
+
+            function fecharLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = ''; // Habilita novamente o scroll
+            }
+
+            function fotoAnterior() {
+                fotoIndiceAtivo = (fotoIndiceAtivo - 1 + galeriaFotos.length) % galeriaFotos.length;
+                lightboxImg.src = galeriaFotos[fotoIndiceAtivo];
+            }
+
+            function proximaFoto() {
+                fotoIndiceAtivo = (fotoIndiceAtivo + 1) % galeriaFotos.length;
+                lightboxImg.src = galeriaFotos[fotoIndiceAtivo];
+            }
+
+            // Event Listeners do Lightbox
+            lightboxClose.addEventListener('click', fecharLightbox);
+            lightboxPrev.addEventListener('click', fotoAnterior);
+            lightboxNext.addEventListener('click', proximaFoto);
+
+            // Fechar ao clicar no background escuro
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox || e.target.classList.contains('lightbox-content')) {
+                    fecharLightbox();
+                }
+            });
+
+            // Atalhos do Teclado para Melhor Usabilidade (Acessibilidade)
+            document.addEventListener('keydown', (e) => {
+                if (!lightbox.classList.contains('active')) return;
+                
+                if (e.key === 'Escape') fecharLightbox();
+                if (e.key === 'ArrowLeft') fotoAnterior();
+                if (e.key === 'ArrowRight') proximaFoto();
+            });
+        });
+    </script>
+</body>
+
+</html>

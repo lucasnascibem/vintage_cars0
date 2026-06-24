@@ -1,0 +1,2093 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Catálogo moderno de carros clássicos brasileiros da indústria automobilística. Explore modelos lendários como Fusca, Opala, Corcel e mais.">
+    <title>Catálogo de Carros Antigos Brasileiros</title>
+    
+    <!-- Importação de fonte premium -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- Estilos Incorporados para Carregamento Rápido -->
+    <style>
+        /* Declaração da fonte Dog Days Brush */
+        @font-face {
+            font-family: 'Dog Days Brush';
+            src: url('./fonts/dog-days-brush.otf') format('opentype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        :root {
+            /* Paleta Premium Vintage Dark Mode (Mogno Clássico, Latão & Ouro) */
+            --bg-color: #120e0c; /* Espresso escuro profundo */
+            --text-color: #f3ede2; /* Creme de linho suave */
+            --text-muted: #bdae9c; /* Creme envelhecido suave */
+            --card-bg: #1c1612; /* Fumo de tabaco envelhecido */
+            --card-border: #33261c; /* Borda cor madeira mogno aquecida */
+            --header-bg: #0b0807; /* Café preto absoluto */
+            --btn-bg: rgba(217, 160, 91, 0.08);
+            --btn-hover: rgba(217, 160, 91, 0.16);
+            --btn-text: #ebdcc3;
+            --glow-shadow: rgba(217, 160, 91, 0.04);
+            --focus-ring: #d9a05b; /* Ouro envelhecido / Latão */
+            
+            /* Cores auxiliares vintage */
+            --accent-ochre: #d9a05b;
+            --accent-green: #3e5a4a;
+            --badge-bg: #3e5a4a;
+            --badge-text: #ebdcc3;
+            --inset-border: rgba(217, 160, 91, 0.12);
+            --bg-texture: radial-gradient(circle at center, transparent 40%, rgba(0, 0, 0, 0.4) 100%);
+            --transition-speed: 0.3s;
+        }
+
+        /* Estilo do Modo Claro Conforme Solicitado */
+        body.light-mode {
+            --bg-color: #FAFAF5; /* Fundo do modo claro exato */
+            --text-color: #333330; /* Texto cinza escuro, não preto */
+            --text-muted: #666660; /* Cinza médio para textos secundários */
+            --card-bg: #fdfdfb; /* Creme marfim suave */
+            --card-border: #e2e2d9; /* Papelão envelhecido muito leve */
+            --header-bg: #f3f3eb; /* Palha de latão escovado claro */
+            --btn-bg: rgba(51, 51, 48, 0.06);
+            --btn-hover: rgba(51, 51, 48, 0.12);
+            --btn-text: #333330;
+            --glow-shadow: rgba(184, 82, 51, 0.04);
+            --focus-ring: #c78d38; /* Ocre rico */
+            
+            --accent-ochre: #c78d38;
+            --accent-green: #2a473a;
+            --badge-bg: #2a473a;
+            --badge-text: #FAFAF5;
+            --inset-border: rgba(51, 51, 48, 0.08);
+            --bg-texture: radial-gradient(circle at center, transparent 30%, rgba(47, 32, 21, 0.03) 100%);
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            background-image: var(--bg-texture);
+            color: var(--text-color);
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        h1, h2, h3, .brand p {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* HEADER E NAVEGAÇÃO */
+        .main-header {
+            position: sticky;
+            top: 0;
+            background-color: var(--header-bg);
+            color: var(--text-color);
+            padding: 15px 25px;
+            transition: background-color var(--transition-speed) ease;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+            border-bottom: 1px solid var(--card-border);
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .brand h1 {
+            margin: 0 0 2px 0;
+            font-size: 2.2rem;
+            font-family: 'Dog Days Brush', 'Playfair Display', serif;
+            letter-spacing: 0.5px;
+            line-height: 1;
+        }
+
+        .brand p {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.75;
+            font-style: italic;
+        }
+
+        /* BARRA DE FERRAMENTAS DO HEADER */
+        .header-tools {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* BUSCA COM LUPA ANIMADA */
+        .search-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            min-width: 45px;
+            width: auto;
+            flex: 0 0 auto;
+        }
+
+        .search-input {
+            width: 0;
+            max-width: 0;
+            min-width: 0;
+            padding: 8px 0;
+            border: none;
+            background: transparent;
+            color: transparent; /* Fades out text when collapsed */
+            font-family: inherit;
+            font-size: 0.95rem;
+            outline: none;
+            border-bottom: 2px solid transparent;
+            overflow: hidden;
+            white-space: nowrap;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                        max-width 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                        padding 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                        color 0.2s ease,
+                        border-bottom-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .search-input::placeholder {
+            color: transparent; /* Fades out placeholder when collapsed */
+            transition: color 0.2s ease;
+        }
+
+        /* Expandir a busca ao passar o mouse ou focar no container */
+        .search-container:hover .search-input,
+        .search-container:focus-within .search-input,
+        .search-input:not(:placeholder-shown) {
+            width: 200px;
+            max-width: 200px;
+            padding: 8px 12px 8px 35px;
+            border-bottom-color: var(--focus-ring);
+            color: var(--text-color);
+        }
+
+        .search-container:hover .search-input::placeholder,
+        .search-container:focus-within .search-input::placeholder,
+        .search-input:not(:placeholder-shown)::placeholder {
+            color: var(--text-muted);
+        }
+
+        .search-icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color);
+            transition: color var(--transition-speed);
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: auto;
+        }
+
+        .search-container:hover .search-icon-btn,
+        .search-container:focus-within .search-icon-btn {
+            color: var(--focus-ring);
+        }
+
+        .search-icon-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* AUTOCOMPLETE DROPDOWN */
+        .autocomplete-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            max-height: 250px;
+            overflow-y: auto;
+            z-index: 1100;
+            display: none;
+        }
+
+        .autocomplete-item {
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .autocomplete-item:hover {
+            background-color: var(--btn-hover);
+        }
+
+        .autocomplete-name {
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        .autocomplete-year {
+            font-size: 0.8rem;
+            color: var(--accent-ochre);
+            background: var(--btn-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* BOTÕES DE CONTROLE */
+        .tool-btn {
+            background: var(--btn-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            color: var(--text-color);
+            padding: 8px 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: background-color 0.2s, border-color 0.2s, transform 0.1s;
+        }
+
+        .tool-btn:hover {
+            background-color: var(--btn-hover);
+            border-color: var(--focus-ring);
+        }
+
+        .tool-btn:active {
+            transform: scale(0.97);
+        }
+
+        .tool-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* FILTRO DE ANO SECUNDÁRIO (MODO CATEGORIA) */
+        .year-filter-wrapper {
+            display: none; /* Apenas visível quando modo categoria está ativo */
+            animation: fadeIn 0.3s ease forwards;
+        }
+
+        .year-select {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            color: var(--text-color);
+            padding: 8px 12px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            outline: none;
+            cursor: pointer;
+            transition: border-color var(--transition-speed);
+        }
+
+        .year-select:focus {
+            border-color: var(--focus-ring);
+        }
+
+        /* MENU DO TEMA COM SVG */
+        .theme-toggle-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: transform 0.5s ease;
+        }
+
+        .theme-toggle-btn:hover svg {
+            transform: rotate(45deg);
+        }
+
+        /* CONTAINER DOS CARDS */
+        main {
+            max-width: 1200px;
+            margin: 40px auto 100px auto;
+            padding: 0 20px;
+        }
+
+        /* Modo Categoria: agrupamento por Fabricante */
+        .category-group {
+            margin-bottom: 50px;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .category-title {
+            font-size: 2.2rem;
+            color: var(--accent-ochre);
+            border-bottom: 2px dashed var(--card-border);
+            padding-bottom: 8px;
+            margin-bottom: 25px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .category-title::after {
+            content: '';
+            flex-grow: 1;
+            height: 1px;
+            background: transparent;
+        }
+
+        .car-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 35px;
+        }
+
+        /* CARD CARRO */
+        .car {
+            position: relative;
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            overflow: hidden;
+            background-color: var(--card-bg);
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            transform: translateY(40px) scale(0.96) rotateX(2deg);
+            transform-origin: bottom center;
+            transition: opacity 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                        transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                        border-color var(--transition-speed) ease, 
+                        background-color var(--transition-speed) ease, 
+                        box-shadow 0.4s ease;
+        }
+
+        /* Efeito de borda interna retrô refinada */
+        .car::after {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            bottom: 8px;
+            border: 1px solid var(--inset-border);
+            pointer-events: none;
+            border-radius: 12px;
+            transition: border-color var(--transition-speed);
+            z-index: 10;
+        }
+
+        /* Estado Revelado */
+        .car.reveal {
+            opacity: 1;
+            transform: translateY(0) scale(1) rotateX(0);
+        }
+
+        /* Hover apenas quando revelado */
+        .car.reveal:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px var(--glow-shadow);
+            border-color: var(--focus-ring);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Garante visibilidade se o sistema desabilitar animações */
+        @media (prefers-reduced-motion: reduce) {
+            .car {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+            }
+            .category-group {
+                animation: none !important;
+            }
+        }
+
+        /* IMAGEM CARRO - Apenas a imagem é clicável */
+        .img-link {
+            display: block;
+            width: 100%;
+            height: 240px;
+            overflow: hidden;
+            background-color: var(--header-bg);
+            border-bottom: 1px solid var(--card-border);
+            position: relative;
+            cursor: pointer;
+            z-index: 20; /* Garante que fique acima da moldura interna */
+        }
+
+        .car img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .img-link:hover img {
+            transform: scale(1.06);
+        }
+
+        /* Overlay ao passar o mouse na foto indicando detalhes */
+        .img-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .img-link:hover .img-overlay {
+            opacity: 1;
+        }
+
+        /* INFO CARRO (Não clicável) */
+        .car-info {
+            padding: 24px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .car-info h2 {
+            margin: 0 0 10px 0;
+            color: var(--text-color);
+            font-family: 'Dog Days Brush', 'Playfair Display', serif;
+            font-size: 2.2rem;
+            line-height: 1.1;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        .car-info .year {
+            align-self: flex-start;
+            background-color: var(--badge-bg);
+            color: var(--badge-text);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 4px;
+            letter-spacing: 1.2px;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            border: 1px dashed rgba(255, 255, 255, 0.2);
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.15), 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .car-info p {
+            margin: 0;
+            color: var(--text-color);
+            opacity: 0.85;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* MENSAGEM DE ERRO/SEM RESULTADOS */
+        .no-results {
+            text-align: center;
+            padding: 50px 20px;
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            grid-column: 1 / -1;
+            animation: fadeIn 0.4s ease;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background-color: var(--header-bg);
+            color: var(--text-color);
+            width: 100%;
+            border-top: 1px solid var(--card-border);
+            font-size: 0.9rem;
+            opacity: 0.75;
+            box-sizing: border-box;
+        }
+
+        /* ========== PAINEL DE CONFIGURAÇÕES EXPANSÍVEL ========== */
+        .settings-panel {
+            position: relative;
+        }
+
+        .settings-btn {
+            background: var(--btn-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            color: var(--text-color);
+            padding: 8px 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.95rem;
+            transition: all var(--transition-speed) ease;
+            font-weight: 500;
+        }
+
+        .settings-btn:hover {
+            background: var(--btn-hover);
+            color: var(--focus-ring);
+        }
+
+        .settings-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: transform 0.5s ease;
+        }
+
+        .settings-panel.active .settings-btn svg {
+            transform: rotate(45deg);
+        }
+
+        .settings-menu {
+            position: absolute;
+            top: 150%;
+            right: 0;
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px) scale(0.95);
+            transition: all 0.3s ease;
+            z-index: 1100;
+            min-width: 280px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .settings-panel.active .settings-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .settings-menu h3 {
+            margin: 0 0 12px 0;
+            font-size: 0.95rem;
+            color: var(--focus-ring);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 10px;
+        }
+
+        .theme-buttons-group,
+        .mode-buttons-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .theme-btn,
+        .mode-btn {
+            background: var(--btn-bg);
+            border: 2px solid transparent;
+            border-radius: 8px;
+            color: var(--text-color);
+            padding: 10px 12px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-align: left;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .theme-btn:hover,
+        .mode-btn:hover {
+            background: var(--btn-hover);
+            color: var(--focus-ring);
+        }
+
+        .theme-btn.active,
+        .mode-btn.active {
+            border-color: var(--focus-ring);
+            background: var(--btn-hover);
+            color: var(--focus-ring);
+            font-weight: 700;
+        }
+
+        .theme-btn::before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+            background: var(--accent-ochre);
+            flex-shrink: 0;
+        }
+
+        .mode-btn::before {
+            content: '';
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--focus-ring);
+            flex-shrink: 0;
+        }
+
+        /* ========== TEMAS RETRÔ ========== */
+
+        /* ========== TEMAS RETRÔ ========== */
+
+        /* TEMA ANOS 70 - Elegância Retrô Refinada */
+        body.theme-70s {
+            --bg-color: #2d241f; /* Marrom escuro profundo */
+            --text-color: #e8ddd4; /* Bege quente suave */
+            --text-muted: #a89080; /* Marrom médio elegante */
+            --card-bg: #3a2f28; /* Marrom rico profundo */
+            --card-border: #5c4a3d; /* Borda marrom temperado */
+            --header-bg: #1a1510; /* Marrom muito escuro */
+            --btn-bg: rgba(120, 95, 75, 0.12);
+            --btn-hover: rgba(120, 95, 75, 0.2);
+            --btn-text: #e8ddd4;
+            --glow-shadow: rgba(120, 95, 75, 0.08);
+            --focus-ring: #9d7e63; /* Marrom acinzentado elegante */
+            --accent-ochre: #9d7e63;
+            --accent-green: #5d6b55;
+            --badge-bg: #5d6b55;
+            --badge-text: #e8ddd4;
+            --inset-border: rgba(120, 95, 75, 0.15);
+            --bg-texture: radial-gradient(circle at center, transparent 40%, rgba(120, 95, 75, 0.08) 100%);
+        }
+
+        body.theme-70s.light-mode {
+            --bg-color: #f9f6f2; /* Bege muito claro elegante */
+            --text-color: #3d2f28; /* Marrom escuro */
+            --text-muted: #6b5d54; /* Marrom médio */
+            --card-bg: #fef9f5; /* Creme muito claro */
+            --card-border: #d4c4b3; /* Bege neutral */
+            --header-bg: #f0e8e0; /* Bege palha */
+            --btn-bg: rgba(120, 95, 75, 0.08);
+            --btn-hover: rgba(120, 95, 75, 0.15);
+            --btn-text: #3d2f28;
+            --focus-ring: #8b6f57;
+            --accent-ochre: #8b6f57;
+            --accent-green: #6b7860;
+        }
+
+        /* TEMA ANOS 80 - Retrowave / Cyber Neon */
+        body.theme-80s {
+            --bg-color: #0f051d; /* Roxo escuro profundo */
+            --text-color: #f0e6ff; /* Roxo pastel claro */
+            --text-muted: #9a8bb5; /* Roxo acinzentado */
+            --card-bg: #190b2e; /* Card roxo */
+            --card-border: #3a1c66; /* Borda magenta escura */
+            --header-bg: #080210; /* Quase preto */
+            --btn-bg: rgba(255, 0, 127, 0.1);
+            --btn-hover: rgba(255, 0, 127, 0.2);
+            --btn-text: #ff66cc;
+            --glow-shadow: rgba(255, 0, 127, 0.08);
+            --focus-ring: #ff007f; /* Magenta neon */
+            --accent-ochre: #00ffff; /* Ciano */
+            --accent-green: #39ff14; /* Verde neon */
+            --badge-bg: #ff007f;
+            --badge-text: #ffffff;
+            --inset-border: rgba(0, 255, 255, 0.15);
+            --bg-texture: linear-gradient(180deg, rgba(255, 0, 127, 0.05) 0%, rgba(0, 0, 0, 0) 100%);
+        }
+
+        body.theme-80s.light-mode {
+            --bg-color: #fdf9ff;
+            --text-color: #2b1442;
+            --text-muted: #6f5d82;
+            --card-bg: #f6effc;
+            --card-border: #decbe8;
+            --header-bg: #efe4f7;
+            --btn-bg: rgba(255, 0, 127, 0.06);
+            --btn-hover: rgba(255, 0, 127, 0.12);
+            --btn-text: #cc0066;
+            --focus-ring: #ff007f;
+            --accent-ochre: #008080;
+            --accent-green: #1e7a1e;
+        }
+
+        /* TEMA ANOS 90 - Grunge / Teal Industrial */
+        body.theme-90s {
+            --bg-color: #14191a;
+            --text-color: #e6ecec;
+            --text-muted: #8aa0a0;
+            --card-bg: #1d2526;
+            --card-border: #344243;
+            --header-bg: #0d1112;
+            --btn-bg: rgba(184, 115, 51, 0.12);
+            --btn-hover: rgba(184, 115, 51, 0.22);
+            --btn-text: #e6a86c;
+            --glow-shadow: rgba(184, 115, 51, 0.06);
+            --focus-ring: #e6a86c;
+            --accent-ochre: #5f9ea0;
+            --accent-green: #6b8e23;
+            --badge-bg: #5f9ea0;
+            --badge-text: #14191a;
+            --inset-border: rgba(95, 158, 160, 0.15);
+            --bg-texture: radial-gradient(circle at center, transparent 40%, rgba(95, 158, 160, 0.04) 100%);
+        }
+
+        body.theme-90s.light-mode {
+            --bg-color: #f5f7f7;
+            --text-color: #242f30;
+            --text-muted: #5e6f70;
+            --card-bg: #ebf0f0;
+            --card-border: #cbd4d4;
+            --header-bg: #dee5e5;
+            --btn-bg: rgba(184, 115, 51, 0.08);
+            --btn-hover: rgba(184, 115, 51, 0.15);
+            --btn-text: #b85c14;
+            --focus-ring: #b85c14;
+            --accent-ochre: #3b7a7a;
+            --accent-green: #4b6b1d;
+        }
+
+        /* TEMA ANOS 2010 - Moderno Sofisticado */
+        body.theme-2010s {
+            --bg-color: #1a1a24; /* Cinza azul escuro */
+            --text-color: #e0e0ea; /* Branco azulado elegante */
+            --text-muted: #9098a8; /* Cinza azul médio */
+            --card-bg: #232536; /* Cinza azul profundo */
+            --card-border: #3e4556; /* Borda cinza azul */
+            --header-bg: #0f0f15; /* Quase preto */
+            --btn-bg: rgba(80, 100, 140, 0.12);
+            --btn-hover: rgba(80, 100, 140, 0.2);
+            --btn-text: #e0e0ea;
+            --glow-shadow: rgba(80, 100, 140, 0.1);
+            --focus-ring: #7a94b8; /* Azul-cinza elegante */
+            --accent-ochre: #7a94b8;
+            --accent-green: #6b8a6b;
+            --badge-bg: #6b8a6b;
+            --badge-text: #1a1a24;
+            --inset-border: rgba(80, 100, 140, 0.12);
+            --bg-texture: radial-gradient(circle at center, transparent 40%, rgba(80, 100, 140, 0.05) 100%);
+        }
+
+        body.theme-2010s.light-mode {
+            --bg-color: #f8f9fb; /* Branco azulado muito claro */
+            --text-color: #2a2d3a; /* Cinza escuro profundo */
+            --text-muted: #666d7a; /* Cinza médio */
+            --card-bg: #fcfdff; /* Branco puro com leve azul */
+            --card-border: #cfd4e0; /* Borda cinza azul claro */
+            --header-bg: #f0f2f8; /* Cinza azul pálido */
+            --btn-bg: rgba(80, 100, 140, 0.08);
+            --btn-hover: rgba(80, 100, 140, 0.14);
+            --btn-text: #2a2d3a;
+            --focus-ring: #6883a8;
+            --accent-ochre: #6883a8;
+            --accent-green: #7a8a7a;
+        }
+
+        /* TEMA FUTURISTA - Cyberpunk */
+        body.theme-futurista {
+            --bg-color: #06080d;
+            --text-color: #dcf8ff;
+            --text-muted: #7caab5;
+            --card-bg: #0d121f;
+            --card-border: #1a263d;
+            --header-bg: #030407;
+            --btn-bg: rgba(0, 255, 170, 0.08);
+            --btn-hover: rgba(0, 255, 170, 0.18);
+            --btn-text: #00ffaa;
+            --glow-shadow: rgba(0, 255, 170, 0.06);
+            --focus-ring: #00ffaa;
+            --accent-ochre: #ff3e3e;
+            --accent-green: #00e5ff;
+            --badge-bg: #00ffaa;
+            --badge-text: #06080d;
+            --inset-border: rgba(0, 240, 255, 0.15);
+            --bg-texture: linear-gradient(90deg, rgba(0,255,170,0.02) 0%, rgba(0,0,0,0) 100%);
+        }
+
+        body.theme-futurista.light-mode {
+            --bg-color: #f0f5f8;
+            --text-color: #0f1a24;
+            --text-muted: #4a5b6a;
+            --card-bg: #e4ecf2;
+            --card-border: #ccdbe3;
+            --header-bg: #d5e2ea;
+            --btn-bg: rgba(0, 180, 120, 0.08);
+            --btn-hover: rgba(0, 180, 120, 0.15);
+            --btn-text: #008c5a;
+            --focus-ring: #008c5a;
+            --accent-ochre: #cc2424;
+            --accent-green: #008ca0;
+        }
+
+        /* TEMA TROPICAL - Verde e Amarelo */
+        body.theme-tropical {
+            --bg-color: #0a1c12;
+            --text-color: #f0faf4;
+            --text-muted: #93bfa7;
+            --card-bg: #102a1c;
+            --card-border: #1c442e;
+            --header-bg: #050e09;
+            --btn-bg: rgba(255, 215, 0, 0.1);
+            --btn-hover: rgba(255, 215, 0, 0.2);
+            --btn-text: #ffd700;
+            --glow-shadow: rgba(255, 215, 0, 0.05);
+            --focus-ring: #ffd700;
+            --accent-ochre: #ffd700;
+            --accent-green: #00ffaa;
+            --badge-bg: #ffd700;
+            --badge-text: #0a1c12;
+            --inset-border: rgba(255, 215, 0, 0.12);
+            --bg-texture: radial-gradient(circle at center, transparent 40%, rgba(255, 215, 0, 0.03) 100%);
+        }
+
+        body.theme-tropical.light-mode {
+            --bg-color: #f7faf7;
+            --text-color: #0f2b1a;
+            --text-muted: #4a7059;
+            --card-bg: #eef5ee;
+            --card-border: #d3e4d3;
+            --header-bg: #e0ede0;
+            --btn-bg: rgba(200, 150, 0, 0.08);
+            --btn-hover: rgba(200, 150, 0, 0.15);
+            --btn-text: #a07500;
+            --focus-ring: #a07500;
+            --accent-ochre: #ffd700;
+            --accent-green: #00a86b;
+        }
+
+        /* TEMA CLÁSSICO - Original Vintage (Dark Mode Default) */
+        body.theme-classico,
+        body.theme-classico.light-mode {
+            /* Mantém as configurações padrão de :root e body.light-mode */
+        }
+
+        /* ========== SIDEBAR CATEGORY MENU ========== */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            z-index: 1500;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .category-sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 320px;
+            max-width: 85%;
+            height: 100%;
+            background-color: var(--card-bg);
+            border-right: 1px solid var(--card-border);
+            z-index: 1600;
+            transform: translateX(-100%);
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+            display: flex;
+            flex-direction: column;
+            box-shadow: 5px 0 25px rgba(0,0,0,0.3);
+            box-sizing: border-box;
+        }
+        .category-sidebar.active {
+            transform: translateX(0);
+        }
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid var(--card-border);
+        }
+        .sidebar-header h2 {
+            margin: 0;
+            font-size: 1.4rem;
+            color: var(--accent-ochre);
+            font-family: 'Playfair Display', serif;
+        }
+        .sidebar-close-btn {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.8rem;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0;
+            transition: color 0.2s;
+        }
+        .sidebar-close-btn:hover {
+            color: var(--focus-ring);
+        }
+        .sidebar-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .sidebar-section h3 {
+            margin: 0 0 10px 0;
+            font-size: 0.95rem;
+            color: var(--focus-ring);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+        .category-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .category-item-btn {
+            background: var(--btn-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            color: var(--text-color);
+            padding: 10px 14px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-align: left;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .category-item-btn:hover {
+            background: var(--btn-hover);
+            border-color: var(--focus-ring);
+            color: var(--focus-ring);
+        }
+        .category-item-btn.active {
+            border-color: var(--focus-ring);
+            background: var(--btn-hover);
+            color: var(--focus-ring);
+            font-weight: 700;
+        }
+        .category-count {
+            font-size: 0.75rem;
+            background: var(--card-border);
+            color: var(--text-muted);
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+        .category-item-btn.active .category-count {
+            background: var(--focus-ring);
+            color: var(--bg-color);
+        }
+        .sidebar-year-wrapper {
+            margin-top: 10px;
+        }
+        .sidebar-year-wrapper select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid var(--card-border);
+            background-color: var(--header-bg);
+            color: var(--text-color);
+            font-family: inherit;
+            font-size: 0.95rem;
+            cursor: pointer;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .sidebar-year-wrapper select:focus {
+            border-color: var(--focus-ring);
+        }
+
+        /* Color indicators for themes */
+        .theme-btn[data-theme="classico"]::before { background: #d9a05b; }
+        .theme-btn[data-theme="70s"]::before { background: #9d7e63; }
+        .theme-btn[data-theme="80s"]::before { background: #ff007f; }
+        .theme-btn[data-theme="90s"]::before { background: #5f9ea0; }
+        .theme-btn[data-theme="2010s"]::before { background: #7a94b8; }
+        .theme-btn[data-theme="futurista"]::before { background: #00ffaa; }
+        .theme-btn[data-theme="tropical"]::before { background: #00a86b; }
+
+        /* OVERLAY DE TRANSIÇÃO DE PÁGINA */
+        .page-transition-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-color);
+            z-index: 9999;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            pointer-events: none;
+        }
+
+        body.page-loaded .page-transition-overlay {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* ========== CARROSSEL ESTILO STREAMING (HIGHLIGHTS) ========== */
+        .highlights-section {
+            max-width: 1200px;
+            margin: 40px auto 0 auto;
+            padding: 0 20px;
+            box-sizing: border-box;
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        .highlights-container {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 30px 25px;
+            position: relative;
+            box-shadow: 0 10px 30px var(--glow-shadow);
+            overflow: hidden;
+        }
+
+        /* Moldura interna retrô refinada */
+        .highlights-container::after {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 1px solid var(--inset-border);
+            border-radius: 14px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .highlights-title {
+            margin: 0 0 20px 0;
+            font-size: 2.0rem;
+            color: var(--accent-ochre);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .carousel-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            z-index: 2;
+        }
+
+        .carousel-track-container {
+            overflow: hidden;
+            width: 100%;
+            border-radius: 12px;
+            scroll-behavior: smooth;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 20px;
+            padding: 10px 5px 15px 5px; /* padding-top/bottom extra para a sombra e o hover scale sem cortar */
+            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+            will-change: transform;
+        }
+
+        /* CARD DO CARROSSEL (WIDESCREEN/POSTER) */
+        .carousel-card {
+            flex: 0 0 calc((100% - 80px) / 5); /* Exibe 5 cards por padrão */
+            min-width: 180px;
+            position: relative;
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--header-bg);
+            cursor: pointer;
+            box-sizing: border-box;
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+                        border-color 0.4s ease,
+                        box-shadow 0.4s ease,
+                        z-index 0.4s ease;
+            z-index: 2;
+        }
+
+        .carousel-card::after {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            right: 6px;
+            bottom: 6px;
+            border: 1px solid var(--inset-border);
+            border-radius: 8px;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .carousel-card-img-link {
+            display: block;
+            width: 100%;
+            height: 140px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .carousel-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* Overlay com informações que aparecem no hover */
+        .carousel-card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.2) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 15px;
+            box-sizing: border-box;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 15;
+            color: #fff;
+        }
+
+        .carousel-card-title {
+            margin: 0 0 4px 0;
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+            color: #ebdcc3;
+            line-height: 1.2;
+        }
+
+        .carousel-card-year {
+            font-size: 0.75rem;
+            color: var(--accent-ochre);
+            background: rgba(217, 160, 91, 0.15);
+            align-self: flex-start;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            border: 1px dashed rgba(217, 160, 91, 0.3);
+        }
+
+        /* Hover no Card */
+        .carousel-card:hover {
+            transform: scale(1.08) translateY(-5px);
+            z-index: 100;
+            border-color: var(--focus-ring);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .carousel-card:hover img {
+            transform: scale(1.08);
+        }
+
+        .carousel-card:hover .carousel-card-overlay {
+            opacity: 1;
+        }
+
+        /* BOTÕES DE NAVEGAÇÃO DO CARROSSEL */
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(28, 22, 18, 0.6);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid var(--card-border);
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all var(--transition-speed) ease;
+            opacity: 0;
+            visibility: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .carousel-wrapper:hover .carousel-arrow {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .carousel-arrow:hover {
+            background: var(--focus-ring);
+            color: var(--bg-color);
+            border-color: var(--focus-ring);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-arrow.prev {
+            left: -15px;
+        }
+
+        .carousel-arrow.next {
+            right: -15px;
+        }
+
+        .carousel-arrow svg {
+            width: 24px;
+            height: 24px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* Responsividade do Carrossel */
+        @media (max-width: 1024px) {
+            .carousel-card {
+                flex: 0 0 calc((100% - 60px) / 4); /* 4 cards */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .carousel-card {
+                flex: 0 0 calc((100% - 40px) / 3); /* 3 cards */
+            }
+            .carousel-arrow {
+                opacity: 1;
+                visibility: visible;
+                width: 38px;
+                height: 38px;
+            }
+            .carousel-arrow.prev { left: -5px; }
+            .carousel-arrow.next { right: -5px; }
+            .highlights-title {
+                font-size: 1.6rem;
+            }
+            .highlights-container {
+                padding: 20px 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .carousel-card {
+                flex: 0 0 calc((100% - 20px) / 2); /* 2 cards */
+            }
+            .carousel-card-img-link {
+                height: 110px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar de Categorias e Filtros -->
+    <div id="sidebarOverlay" class="sidebar-overlay"></div>
+    <aside id="categorySidebar" class="category-sidebar">
+        <div class="sidebar-header">
+            <h2>Fabricantes & Filtros</h2>
+            <button id="sidebarCloseBtn" class="sidebar-close-btn" aria-label="Fechar Filtros">&times;</button>
+        </div>
+        <div class="sidebar-content">
+            <div class="sidebar-section">
+                <h3>Fabricantes</h3>
+                <div id="sidebarCategoryList" class="category-list">
+                    <!-- Gerado Dinamicamente -->
+                </div>
+            </div>
+            <div class="sidebar-section">
+                <h3>Filtrar por Ano</h3>
+                <div class="sidebar-year-wrapper">
+                    <select id="sidebarYearSelect" aria-label="Selecionar Ano">
+                        <option value="">Todos os Anos</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Header Principal -->
+    <header class="main-header">
+        <div class="header-content">
+            <!-- Título e Slogan Vintage -->
+            <div class="brand">
+                <h1>Clássicos Brasileiros</h1>
+                <p>A elegância imortal da nossa indústria</p>
+            </div>
+
+            <!-- Ferramentas e Opções de Filtro/Tema -->
+            <div class="header-tools">
+                <!-- Busca com Ícone Expansível -->
+                <div class="search-container">
+                    <button class="search-icon-btn" aria-label="Buscar">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </button>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Buscar por modelo ou ano..." autocomplete="off">
+                    <div id="autocompleteDropdown" class="autocomplete-dropdown"></div>
+                </div>
+
+                <!-- Botão de Filtros/Categorias (Abre a Sidebar) -->
+                <button id="sidebarToggleBtn" class="tool-btn" title="Abrir Filtros e Fabricantes">
+                    <svg viewBox="0 0 24 24">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                    <span>Filtros</span>
+                </button>
+
+                <!-- Painel de Configurações Expansível -->
+                <div class="settings-panel" id="settingsPanel">
+                    <button class="settings-btn" id="settingsBtn" aria-label="Configurações" title="Configurações">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="1"></circle>
+                            <circle cx="19" cy="12" r="1"></circle>
+                            <circle cx="5" cy="12" r="1"></circle>
+                            <path d="M12 1v6m0 6v6M5.64 5.64l-4.24-4.24M18.36 5.64l4.24-4.24M5.64 18.36l-4.24 4.24M18.36 18.36l4.24 4.24"></path>
+                        </svg>
+                        <span>Configurações</span>
+                    </button>
+                    <div class="settings-menu" id="settingsMenu">
+                        <!-- Botões de Temas -->
+                        <h3>Temas</h3>
+                        <div class="theme-buttons-group" id="themeButtonsGroup">
+                            <button class="theme-btn active" data-theme="classico" title="Tema Clássico Vintage">Clássico</button>
+                            <button class="theme-btn" data-theme="70s" title="Tema Anos 70">Anos 70</button>
+                            <button class="theme-btn" data-theme="80s" title="Tema Anos 80">Anos 80</button>
+                            <button class="theme-btn" data-theme="90s" title="Tema Anos 90">Anos 90</button>
+                            <button class="theme-btn" data-theme="2010s" title="Tema Anos 2010">Anos 2010</button>
+                            <button class="theme-btn" data-theme="futurista" title="Tema Futurista">Futurista</button>
+                            <button class="theme-btn" data-theme="tropical" title="Tema Tropical">Tropical</button>
+                        </div>
+
+                        <!-- Botão de Modo Claro/Escuro -->
+                        <h3>Modo</h3>
+                        <div class="mode-buttons-group" id="modeButtonsGroup">
+                            <button class="mode-btn active" data-mode="dark" id="darkModeBtn" title="Modo Escuro">Escuro</button>
+                            <button class="mode-btn" data-mode="light" id="lightModeBtn" title="Modo Claro">Claro</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Seção de Destaques (Carrossel Estilo Streaming) -->
+    <section class="highlights-section">
+        <div class="highlights-container">
+            <h2 class="highlights-title">⭐ Clássicos em Destaque</h2>
+            <div class="carousel-wrapper">
+                <button class="carousel-arrow prev" id="carouselPrevBtn" aria-label="Anterior">
+                    <svg viewBox="0 0 24 24">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+                <div class="carousel-track-container">
+                    <div class="carousel-track" id="carouselTrack">
+                        <!-- Cards gerados dinamicamente por JS -->
+                    </div>
+                </div>
+                <button class="carousel-arrow next" id="carouselNextBtn" aria-label="Próximo">
+                    <svg viewBox="0 0 24 24">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Área de Exibição do Catálogo -->
+    <main>
+        <div id="catalogContainer">
+            <!-- Grid de carros ou seções por Fabricante serão injetados dinamicamente -->
+        </div>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2026 Clássicos Brasileiros. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Banco de Dados Embutido — elimina dependência de arquivo externo -->
+    <script>
+        const carrosDados = {
+            fusca: { nome: 'Volkswagen Fusca', ano: '1959-1986', fabricante: 'Volkswagen', descCurta: 'O ícone absoluto da indústria automobilística brasileira, lembrado por sua durabilidade mecânica e simplicidade.', desc: 'O Fusca começou a ser montado no Brasil em 1953, com peças importadas, mas em 1959 passou a ser fabricado nacionalmente. Tornou-se o carro mais vendido do país por décadas, sendo um símbolo de resistência, simplicidade e praticidade que moldou o trânsito nacional.', fotos: ['./imagens/fusca/fusca.webp'], tecnicos: { motor: 'Boxer 1300/1500/1600 (Ar)', potencia: '46 a 65 cv', cambio: 'Manual de 4 marchas' } },
+            opala: { nome: 'Chevrolet Opala', ano: '1968-1992', fabricante: 'Chevrolet', descCurta: 'O Opala marcou gerações no Brasil. Com design incrivelmente elegante, tornou-se o maior ícone esportivo da GM.', desc: 'Apresentado no Salão do Automóvel de 1968, o Opala mesclava a carroceria do Opel Rekord europeu com a mecânica consagrada do Chevrolet Nova americano. Foi o sedã e cupê de luxo mais desejado, respeitado e bem-sucedido de sua época.', fotos: ['./imagens/opala/opala_1978.webp'], tecnicos: { motor: '4 cilindros (2.5) ou 6 cilindros (4.1)', potencia: 'Até 171 cv (SS)', cambio: 'Manual de 3/4 marchas ou Automático' } },
+            opala_1962: { nome: 'Chevrolet Opala 1962', ano: '1962', fabricante: 'Chevrolet', descCurta: 'Uma conceitualização artística e customizada que homenageia as origens do clássico mais amado do Brasil.', desc: 'O Chevrolet Opala 1962 é uma belíssima customização conceitual que une a carroceria clássica de traços sessentistas ao espírito indomável que viria a definir o Opala a partir de 1968. Com acabamento cromado reluzente, pintura em tom pastel vintage e calotas clássicas, este modelo representa a era dourada do design automotivo.', fotos: ['./imagens/opala/opala_1962.png'], tecnicos: { motor: '4 cilindros (2.5) de alta confiabilidade', potencia: '90 cv', cambio: 'Manual de 3 marchas na coluna' } },
+            corcel: { nome: 'Ford Corcel', ano: '1968-1986', fabricante: 'Ford', descCurta: 'Hatchback compacto da Ford de imenso sucesso, muito aclamado por seu consumo econômico de combustível.', desc: 'Herdado da aquisição da Willys Overland do Brasil pela Ford, o projeto originalmente era da Renault. Lançado em 1968, o Corcel inovou trazendo tração dianteira, segurança exemplar e um rodar silencioso e confortável que cativou as famílias brasileiras.', fotos: ['./imagens/corcel/corcel.jpg.webp'], tecnicos: { motor: '1.3, 1.4 e 1.6 (CHT)', potencia: '68 a 90 cv', cambio: 'Manual de 4 ou 5 marchas' } },
+            fiat147: { nome: 'Fiat 147', ano: '1976-1986', fabricante: 'Fiat', descCurta: 'O pioneiro Fiat 147, primeiro hatchback fabricado no país, foi um marco na história da Fiat.', desc: 'O modelo que inaugurou a fábrica da Fiat em Betim, MG. Revolucionou o mercado brasileiro com seu excelente aproveitamento de espaço interno, estepe posicionado no cofre do motor e foi o primeiro carro nacional de produção movido a etanol.', fotos: ['./imagens/fiat147/fiat_147.webp'], tecnicos: { motor: '1050 ou 1300', potencia: '55 a 62 cv', cambio: 'Manual de 4 marchas' } },
+            landau: { nome: 'Ford Landau', ano: '1973-1979', fabricante: 'Ford', descCurta: 'Definiu o segmento de super luxo no Brasil, oferecendo conforto digno de limusines e imponência.', desc: 'Derivado do Galaxie, o Landau era o suprassumo do luxo brasileiro nos anos 70 e 80. Transportou presidentes da república e era reverenciado por sua rodagem macia incomparável que parecia "flutuar" sobre o asfalto nacional.', fotos: ['./imagens/landau/ford_landau1980.webp'], tecnicos: { motor: 'V8 302 (5.0L)', potencia: '199 cv', cambio: 'Manual de 3 marchas ou Automático' } },
+            maverick: { nome: 'Ford Maverick', ano: '1973-1979', fabricante: 'Ford', descCurta: 'O verdadeiro "Muscle Car" da Ford no país. Com um ronco inconfundível, tornou-se o sonho de velocidade.', desc: 'Lançado para competir diretamente com o Opala, o Maverick fez sucesso imediato nas pistas e nas ruas. A versão GT equipada com o estrondoso motor V8 é, até hoje, um dos esportivos clássicos mais cobiçados e valiosos do Brasil.', fotos: ['./imagens/maverick/ford_maverick_1973.jpg'], tecnicos: { motor: '4 cilindros (2.3) ou V8 (302)', potencia: 'Até 199 cv', cambio: 'Manual de 4 marchas' } },
+            alfa_romeo_164: { nome: 'Alfa Romeo 164 Super', ano: '1995', fabricante: 'Alfa Romeo', descCurta: 'Sedan executivo italiano com design Pininfarina, lembrado pelo motor Busso V6 glorioso e alto luxo.', desc: 'Importado ao Brasil nos anos 90 com a abertura das importações, o 164 redefiniu o segmento de sedãs de luxo no país com seu comportamento dinâmico afiado, eletrônica avançada e o incomparável ronco de seu V6 italiano.', fotos: ['./imagens/alfa_romeo_164/alfa_romeo_164_super_1995.webp'], tecnicos: { motor: 'Busso V6 3.0 24V', potencia: '210 cv', cambio: 'Manual de 5 marchas' } },
+            chrysler_300c: { nome: 'Chrysler 300C V6', ano: '2009', fabricante: 'Chrysler', descCurta: 'Sedã de porte grande americano com design musculoso de cintura alta e extremo luxo.', desc: 'Um dos sedãs de luxo mais imponentes dos anos 2000, conquistou o mercado internacional trazendo visual agressivo que lembra clássicos de gângsteres, aliado a um acabamento refinado de alto padrão e muito espaço interno.', fotos: ['./imagens/chrysler_300c/chrysler_300_c_3.5_v6_2009.webp'], tecnicos: { motor: 'V6 3.5 High Output', potencia: '249 cv', cambio: 'Automático de 5 marchas' } },
+            dodge_charger_1969: { nome: 'Dodge Charger R/T (EUA)', ano: '1969', fabricante: 'Dodge', descCurta: 'O lendário muscle car americano de visual agressivo com grade oculta e motor V8 gigante.', desc: 'Famoso no cinema e nas pistas de arrancada mundiais, o Charger R/T de 1969 representa o ápice absoluto da era dourada dos muscle cars americanos, esbanjando visual intimidador de cintura larga e suspensão reforçada.', fotos: ['./imagens/dodge_charger_1969/dodge_charger_r_t_1969.webp'], tecnicos: { motor: 'V8 440 Magnum (7.2L)', potencia: '375 cv', cambio: 'Manual de 4 marchas' } },
+            dodge_charger_1975: { nome: 'Dodge Charger R/T', ano: '1975', fabricante: 'Dodge', descCurta: 'O mais potente e cobiçado esportivo de luxo nacional dos anos 70, com o ronco do V8 318.', desc: 'Fabricado nacionalmente pela Chrysler do Brasil em São Bernardo do Campo, trazia teto de vinil, interior luxuoso e era o maior símbolo de status e velocidade das estradas brasileiras nos anos 70.', fotos: ['./imagens/dodge_charger_1975/dodge_charger_r_t_1975.webp'], tecnicos: { motor: 'V8 318 (5.2L)', potencia: '215 cv', cambio: 'Manual de 4 marchas' } },
+            ferrari_348: { nome: 'Ferrari 348 TB', ano: '1992', fabricante: 'Ferrari', descCurta: 'Superesportivo italiano de motor V8 central e design agressivo inspirado na lendária Testarossa.', desc: 'Sucessora direta da 328, a 348 TB combinava alto desempenho de pista com entradas de ar laterais aletadas marcantes da estética italiana dos anos 90, sendo equipada com chassi monocoque inovador para a Ferrari.', fotos: ['./imagens/ferrari_348/ferrari_348_tb_1992.webp'], tecnicos: { motor: 'V8 3.4L 32V', potencia: '300 cv', cambio: 'Manual de 5 marchas' } },
+            fiat_500: { nome: 'Fiat 500 (Cinquecento)', ano: '1975', fabricante: 'Fiat', descCurta: 'O carismático microcarro italiano amado mundialmente por suas dimensões e charme urbano.', desc: 'Um dos designs mais amigáveis e eficientes da história automotiva, o Cinquecento motorizou a Itália no pós-guerra e tornou-se um ícone pop atemporal da praticidade urbana em todo o mundo.', fotos: ['./imagens/fiat_500/fiat_500_1975_cinquecento.webp'], tecnicos: { motor: '2 cilindros 594cc', potencia: '18 cv', cambio: 'Manual de 4 marchas' } },
+            fiat_tipo: { nome: 'Fiat Tipo SLX 2.0', ano: '1995', fabricante: 'Fiat', descCurta: 'Hatchback médio italiano que oferecia teto solar, muito espaço e redefiniu o mercado nos anos 90.', desc: 'Importado pela Fiat do Brasil, o Tipo foi um campeão de vendas absoluto, surpreendendo a concorrência pelo seu altíssimo nível de equipamentos, porta-malas generoso e modernidade que chocou o mercado nacional.', fotos: ['./imagens/fiat_tipo/fiat_tipo_slx_2.0_1995.webp'], tecnicos: { motor: '2.0 8V', potencia: '109 cv', cambio: 'Manual de 5 marchas' } },
+            fiat_uno_16r: { nome: 'Fiat Uno 1.6 R', ano: '1992', fabricante: 'Fiat', descCurta: 'O icônico esportivo nacional da Fiat com faixas decorativas e cintos vermelhos esportivos.', desc: 'Conhecido pela agilidade incrível e peso extremamente reduzido, o Uno 1.6 R era um esportivo altamente divertido para a cidade com excelente acerto de suspensão traseira independente.', fotos: ['./imagens/fiat_uno_16r/fiat_uno_1.6_r_1992.webp'], tecnicos: { motor: '1.6 Sevel', potencia: '88 cv', cambio: 'Manual de 5 marchas' } },
+            fiat_uno_mille: { nome: 'Fiat Uno Mille EP', ano: '1996', fabricante: 'Fiat', descCurta: 'O carro popular definitivo do Brasil nos anos 90, recordista de economia e robustez.', desc: 'A versão EP trouxe a moderna tecnologia de injeção eletrônica monoponto ao motor popular Fiasa 1.0, dominando as garagens e as ruas do país por décadas graças à sua manutenção barata.', fotos: ['./imagens/fiat_uno_mille/fiat_uno_mille_ep_1996.webp'], tecnicos: { motor: 'Fiasa 1.0 SPI', potencia: '57 cv', cambio: 'Manual de 5 marchas' } },
+            ford_escort_xr3: { nome: 'Ford Escort XR3 Conversível', ano: '1991', fabricante: 'Ford', descCurta: 'O cobiçado conversível esportivo com capota montada pela lendária Karmann-Ghia.', desc: 'O maior símbolo de status jovem do mercado nacional nos anos 80 e 90, combinando a capota de tecido de acionamento manual eletro-hidráulico alemã com o conceituado motor AP de alta confiabilidade.', fotos: ['./imagens/ford_escort_xr3/ford_escort_xr3_conversivel_1991.webp'], tecnicos: { motor: '1.8 AP (Autolatina)', potencia: '99 cv', cambio: 'Manual de 5 marchas' } },
+            ford_explorer: { nome: 'Ford Explorer Sport 4x4', ano: '1998', fabricante: 'Ford', descCurta: 'SUV americana robusta de duas portas com excelente capacidade fora de estrada.', desc: 'Líder de vendas da febre americana de SUVs nos anos 90, a versão Sport de duas portas trazia visual aventureiro compacto combinado com motor V6 potente e tração integral com acionamento por botão.', fotos: ['./imagens/ford_explorer/ford_explorer_sport_v6_4x4_1998.webp'], tecnicos: { motor: 'V6 4.0L Cologne', potencia: '162 cv', cambio: 'Automático de 4 marchas' } },
+            ford_f150: { nome: 'Ford F-150 Flareside', ano: '1992', fabricante: 'Ford', descCurta: 'Rara picape de caçamba esportiva estreita com para-lamas alargados e visual retrô impecável.', desc: 'Uma das configurações mais cobiçadas da F-150 norte-americana nos anos 90, unindo a força do motor V8 com acabamento elegante XLT Lariat e caçamba Flareside esportiva diferenciada.', fotos: ['./imagens/ford_f150/ford_f_150_xlt_lariat_flare_side_1992.webp'], tecnicos: { motor: 'V8 302 (5.0L)', potencia: '185 cv', cambio: 'Automático de 4 marchas' } },
+            ford_f250_diesel: { nome: 'Ford F-250 Max Power Diesel', ano: '2009', fabricante: 'Ford', descCurta: 'A colossal picape pesada nacional movida pelo torque brutal do motor Cummins Turbo Diesel.', desc: 'Amplamente venerada pela força bruta no campo e presença imponente nas estradas brasileiras, consagrando-se como a picape mais pesada e desejada do país nos anos 2000.', fotos: ['./imagens/ford_f250_diesel/ford_f_250_3.9_xlt_max_power_4x4_cs_diesel_2009.webp'], tecnicos: { motor: 'Cummins 3.9 Turbo Diesel', potencia: '203 cv', cambio: 'Manual de 5 marchas' } },
+            ford_f250_xlt: { nome: 'Ford F-250 XLT', ano: '2001', fabricante: 'Ford', descCurta: 'Picape de grande porte nacional com motor MWM de seis cilindros e rodar macio incomparável.', desc: 'Introduzida para suceder a F-1000, a F-250 conquistou o público pela cabine extremamente confortável, imponência, mecânica indestrutível e robustez nas fazendas nacionais.', fotos: ['./imagens/ford_f250_xlt/ford_f_250_xlt_2001.webp'], tecnicos: { motor: 'MWM Sprint 6 cil. Turbo Diesel', potencia: '180 cv', cambio: 'Manual de 5 marchas' } },
+            ford_f75: { nome: 'Ford F-75 Pick-Up', ano: '1979', fabricante: 'Ford', descCurta: 'A picape utilitária herdeira da Rural Willys, pilar do trabalho rural no interior brasileiro.', desc: 'Originalmente desenvolvida pela Willys Overland e posteriormente fabricada pela Ford, a F-75 era adorada pela robustez e mecânica simples ideal para lama, sendo o principal esteio da agricultura familiar.', fotos: ['./imagens/ford_f75/ford_f_75_2.3_4x4_pick_up_1979.webp'], tecnicos: { motor: '4 cilindros OHC 2.3', potencia: '90 cv', cambio: 'Manual de 4 marchas' } },
+            ford_galaxie_1968: { nome: 'Ford Galaxie 500', ano: '1968', fabricante: 'Ford', descCurta: 'O máximo luxo automotivo nacional dos anos 60, famoso pelo rodar incrivelmente silencioso.', desc: 'Um dos maiores clássicos brasileiros de todos os tempos, oferecendo cabine gigante digna de limousine e direção hidráulica super macia incomparável na época de seu lançamento.', fotos: ['./imagens/ford_galaxie_1968/ford_galaxie_500_1968.webp'], tecnicos: { motor: 'V8 272 (4.5L)', potencia: '164 cv', cambio: 'Manual de 3 marchas na coluna' } },
+            ford_galaxie_ltd: { nome: 'Ford Galaxie LTD (EUA)', ano: '1965', fabricante: 'Ford', descCurta: 'Sedã americano luxuoso de linhas sóbrias que serviu de base para a vinda do Galaxie nacional.', desc: 'O LTD representava o pináculo do luxo da Ford nos EUA, trazendo acabamento requintado com painel imitando jacarandá que inspirou as gerações de Galaxie montadas em São Bernardo.', fotos: ['./imagens/ford_galaxie_ltd/ford_galaxie_500_ltd_1965.webp'], tecnicos: { motor: 'V8 289 (4.7L)', potencia: '200 cv', cambio: 'Automático Cruis-O-Matic' } },
+            ford_jeep: { nome: 'Ford Jeep CJ-5', ano: '1972', fabricante: 'Ford', descCurta: 'O lendário jipe com tração 4x4 e caixa de redução capaz de enfrentar qualquer trilha.', desc: 'Desenvolvido sob herança militar da Willys e depois adotado pela Ford, o CJ-5 tornou-se o principal veículo off-road nacional para terrenos extremos de estradas de terra.', fotos: ['./imagens/ford_jeep/ford_jeep_cj_5_1972.webp'], tecnicos: { motor: '6 cilindros Willys BF-161', potencia: '90 cv', cambio: 'Manual de 3 marchas' } },
+            ford_mustang_1969_conv: { nome: 'Ford Mustang GT Conversível', ano: '1969', fabricante: 'Ford', descCurta: 'Lendário pony car americano conversível com a agressiva e cobiçada frente de 1969.', desc: 'Combinando motor V8 potente e teto conversível automático, o Mustang 1969 representava o sonho de liberdade e velocidade sob o sol da Califórnia, com as novas quatro lanternas frontais.', fotos: ['./imagens/ford_mustang_1969_conv/ford_mustang_conversivel_gt_v8_1969.webp'], tecnicos: { motor: 'V8 351 Windsor (5.8L)', potencia: '290 cv', cambio: 'Automático de 3 marchas' } },
+            ford_mustang_1968_hard: { nome: 'Ford Mustang Hardtop GT', ano: '1968', fabricante: 'Ford', descCurta: 'O clássico cupê de linhas equilibradas que se tornou um dos maiores mitos do cinema mundial.', desc: 'Redesenhado sutilmente em 1968 com novas lanternas e frisos, este Mustang consolidou a dinastia esportiva da Ford globalmente, sendo admirado pela cabine cockpit.', fotos: ['./imagens/ford_mustang_1968_hard/ford_mustang_hard_top_gt_1968.webp'], tecnicos: { motor: 'V8 302 (5.0L)', potencia: '230 cv', cambio: 'Manual de 4 marchas' } },
+            ford_mustang_1969_mach1: { nome: 'Ford Mustang Mach 1', ano: '1969', fabricante: 'Ford', descCurta: 'Esportivo lendário Fastback com suspensão de competição e capô preto fosco intimidador.', desc: 'Projetado como pacote esportivo oficial de alta performance, o Mach 1 trazia faixas refletivas laterais e visual agressivo digno das pistas de arrancada norte-americanas.', fotos: ['./imagens/ford_mustang_1969_mach1/ford_mustang_mach_1_1969.webp'], tecnicos: { motor: 'V8 351 Windsor 4V', potencia: '290 cv', cambio: 'Manual de 4 marchas' } },
+            ford_ranger_splash: { nome: 'Ford Ranger Splash', ano: '1995', fabricante: 'Ford', descCurta: 'Picape esportiva com caçamba de para-lamas alargados que ditou a moda jovem dos anos 90.', desc: 'Raríssima e importada dos EUA, a Ranger Splash trazia cores vibrantes e visual personalizado de fábrica extremamente cobiçado no litoral brasileiro pela juventude dos anos 90.', fotos: ['./imagens/ford_ranger_splash/ford_ranger_splash_1995.webp'], tecnicos: { motor: 'V6 4.0L OHV', potencia: '162 cv', cambio: 'Automático de 4 marchas' } },
+            ford_1932_coupe: { nome: 'Ford Sport Coupe V8 (1932)', ano: '1932', fabricante: 'Ford', descCurta: 'O revolucionário "Model 18", primeiro carro popular a trazer o motor V8 Flathead em massa.', desc: 'Lançado no início da década de 1932, o icônico Ford V8 tornou-se a base favorita para a cultura Hot Rod mundial devido à facilidade de preparação e mecânica simples.', fotos: ['./imagens/ford_1932_coupe/ford_sport_coupe_v8_1932.webp'], tecnicos: { motor: 'V8 Flathead (3.6L)', potencia: '65 cv', cambio: 'Manual de 3 marchas' } },
+            ford_thunderbird_1991: { nome: 'Ford Thunderbird Coupe', ano: '1991', fabricante: 'Ford', descCurta: 'Sofisticado cupê de luxo aerodinâmico americano com visual futurista dos anos 90.', desc: 'A décima geração do Thunderbird destacou-se pela suspensão traseira independente de alta performance, excelente coeficiente aerodinâmico e muito conforto a bordo em longas rodovias.', fotos: ['./imagens/ford_thunderbird_1991/thunderbirdcoupev61991_3.jpg.webp'], tecnicos: { motor: 'V6 3.8L Essex', potencia: '142 cv', cambio: 'Automático de 4 marchas' } },
+            gurgel_motomachine: { nome: 'Gurgel Motomachine', ano: '1992', fabricante: 'Gurgel', descCurta: 'Microcarro urbano brasileiro futurista com portas de acrílico transparentes e cabine aberta.', desc: 'Uma das criações mais geniais de João Gurgel, projetada para ser um veículo pessoal leve, altamente econômico, com chassi rígido e de fácil estacionamento urbano.', fotos: ['./imagens/gurgel_motomachine/gurgel_motomachine_1992.webp'], tecnicos: { motor: 'Enertron 800cc (boxer)', potencia: '36 cv', cambio: 'Manual de 4 marchas' } },
+            gurgel_x12: { nome: 'Gurgel X12', ano: '1989', fabricante: 'Gurgel', descCurta: 'Jipe leve nacional de fibra de vidro plasteel, altamente capaz em terrenos off-road.', desc: 'Construído sob patentes exclusivas do pioneiro João Gurgel, trazia chassi Plasteel e freio Selectraction inovador que permitia travar rodas traseiras individualmente para sair de atoleiros.', fotos: ['./imagens/gurgel_x12/gurgel_x12_1989.webp'], tecnicos: { motor: 'Boxer 1600 (ar)', potencia: '60 cv', cambio: 'Manual de 4 marchas' } },
+            land_rover_defender_130: { nome: 'Land Rover Defender 130', ano: '2004', fabricante: 'Land Rover', descCurta: 'A versão picape cabine dupla militar extrema feita para expedições globais difíceis.', desc: 'Construída sobre chassi de 130 polegadas de entre-eixos, esta Land Rover Defender de cabine dupla é a força pesada favorita de equipes de apoio e expedições científicas em florestas e desertos.', fotos: ['./imagens/land_rover_defender_130/land_rover_defender_130_2004.webp'], tecnicos: { motor: '2.5 Turbo Diesel Td5', potencia: '122 cv', cambio: 'Manual de 5 marchas' } },
+            land_rover_defender_110: { nome: 'Land Rover Defender 110', ano: '2007', fabricante: 'Land Rover', descCurta: 'O jipe britânico utilitário puro e quadrado de visual lendário e indestrutível.', desc: 'Ícone universal de exploração geográfica e travessias no barro, construído com painéis de alumínio rebitados que resistem à ferrugem e intempéries do tempo.', fotos: ['./imagens/land_rover_defender_110/land_rover_defender_2.4_110_2007.webp'], tecnicos: { motor: '2.4 Turbo Diesel Duratorq', potencia: '122 cv', cambio: 'Manual de 6 marchas' } },
+            opala_ss_1980: {
+                nome: 'Chevrolet Opala SS',
+                ano: '1980',
+                fabricante: 'Chevrolet',
+                descCurta: 'O clássico esportivo nacional em sua versão SS, com o lendário motor 250-S.',
+                desc: 'O Chevrolet Opala SS de 1980 representa a esportividade clássica brasileira. Equipado com o consagrado motor de 6 cilindros em linha 4.1 (250-S), trazia acabamento exclusivo, faixas esportivas e o visual marcante que consolidou o Opala como o maior ícone de desempenho de sua época.',
+                fotos: ['./imagens/CHEVROLET OPALA SS - 1980.webp'],
+                tecnicos: {
+                    motor: '6 cilindros em linha (4.1 250-S)',
+                    potencia: '171 cv',
+                    cambio: 'Manual de 4 marchas'
+                }
+            },
+            silverado_1995: {
+                nome: 'Chevrolet Silverado 2500 V8',
+                ano: '1995',
+                fabricante: 'Chevrolet',
+                descCurta: 'Picape de grande porte americana com motor V8, sinônimo de força e robustez.',
+                desc: 'A Chevrolet Silverado 2500 V8 de 1995 é uma das picapes de grande porte mais respeitadas de sua era. Equipada com o poderoso motor V8 454 (7.4L), tornou-se uma referência de torque, durabilidade e capacidade de carga, conquistando admiradores no campo e na cidade pelo seu porte robusto e rodar confortável.',
+                fotos: ['./imagens/CHEVROLET SILVERADO 2500 V8 - 454 - 1995.webp'],
+                tecnicos: {
+                    motor: 'V8 454 (7.4L)',
+                    potencia: '230 cv',
+                    cambio: 'Automático de 4 marchas'
+                }
+            }
+        };
+    </script>
+
+    <!-- Lógica de Controle do Catálogo -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const database = carrosDados;
+
+            // Transição de página dinâmica (entrada e saída)
+            const transitionOverlay = document.createElement('div');
+            transitionOverlay.className = 'page-transition-overlay';
+            document.body.appendChild(transitionOverlay);
+            setTimeout(() => {
+                document.body.classList.add('page-loaded');
+            }, 50);
+
+            document.addEventListener('click', (e) => {
+                const link = e.target.closest('a');
+                if (link && link.getAttribute('href')) {
+                    const href = link.getAttribute('href');
+                    if (
+                        href.startsWith('#') || 
+                        href.startsWith('javascript:') || 
+                        link.target === '_blank' || 
+                        link.hostname !== window.location.hostname
+                    ) {
+                        return;
+                    }
+                    e.preventDefault();
+                    document.body.classList.remove('page-loaded');
+                    setTimeout(() => {
+                        window.location.href = href;
+                    }, 400);
+                }
+            });
+
+            // Referências dos Elementos da Página
+            const body = document.body;
+            const catalogContainer = document.getElementById('catalogContainer');
+            const searchInput = document.getElementById('searchInput');
+            const searchButton = document.querySelector('.search-icon-btn');
+            const autocompleteDropdown = document.getElementById('autocompleteDropdown');
+
+            // Elementos da Sidebar
+            const sidebarToggleBtn = document.getElementById('sidebarToggleBtn');
+            const sidebarOverlay = document.getElementById('sidebarOverlay');
+            const categorySidebar = document.getElementById('categorySidebar');
+            const sidebarCloseBtn = document.getElementById('sidebarCloseBtn');
+            const sidebarCategoryList = document.getElementById('sidebarCategoryList');
+            const sidebarYearSelect = document.getElementById('sidebarYearSelect');
+
+            searchButton?.addEventListener('click', () => {
+                searchInput.focus();
+            });
+
+            // Estados da Aplicação
+            let buscaAtual = '';
+            let fabricanteSelecionado = '';
+            let anoSelecionado = '';
+
+            // Icones SVG para Temas
+            const svgSol = `
+                <svg viewBox="0 0 24 24" id="sunIcon">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+            `;
+
+            const svgLua = `
+                <svg viewBox="0 0 24 24" id="moonIcon">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            `;
+
+            /**
+             * GERENCIAMENTO DE TEMAS E MODO CLARO/ESCURO
+             * Suporta múltiplos temas retrô com alternância de modo claro/escuro
+             */
+            const settingsPanel = document.getElementById('settingsPanel');
+            const settingsBtn = document.getElementById('settingsBtn');
+            const settingsMenu = document.getElementById('settingsMenu');
+            const themeButtonsGroup = document.getElementById('themeButtonsGroup');
+            const modeButtonsGroup = document.getElementById('modeButtonsGroup');
+            const darkModeBtn = document.getElementById('darkModeBtn');
+            const lightModeBtn = document.getElementById('lightModeBtn');
+
+            // Alternância do painel de configurações
+            settingsBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                settingsPanel.classList.toggle('active');
+            });
+
+            // Fecha o painel ao clicar fora dele
+            document.addEventListener('click', (e) => {
+                if (!settingsPanel.contains(e.target)) {
+                    settingsPanel.classList.remove('active');
+                }
+            });
+
+            // Funcionalidade dos botões de tema
+            themeButtonsGroup.querySelectorAll('.theme-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const tema = btn.dataset.theme;
+                    aplicarTema(tema);
+                    
+                    // Atualizar botões ativos
+                    themeButtonsGroup.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                });
+            });
+
+            // Funcionalidade dos botões de modo
+            darkModeBtn.addEventListener('click', () => {
+                alternarModo('dark');
+                darkModeBtn.classList.add('active');
+                lightModeBtn.classList.remove('active');
+            });
+
+            lightModeBtn.addEventListener('click', () => {
+                alternarModo('light');
+                lightModeBtn.classList.add('active');
+                darkModeBtn.classList.remove('active');
+            });
+
+            function aplicarTema(tema) {
+                // Remove todas as classes de tema
+                body.classList.remove('theme-classico', 'theme-70s', 'theme-80s', 'theme-90s', 'theme-2000s', 'theme-2010s', 'theme-futurista', 'theme-tropical');
+                
+                // Adiciona a nova classe de tema
+                if (tema !== 'classico') {
+                    body.classList.add(`theme-${tema}`);
+                }
+                
+                // Salva o tema no localStorage
+                localStorage.setItem('vintageTema', tema);
+            }
+
+            function alternarModo(modo) {
+                const isLight = modo === 'light';
+                body.classList.toggle('light-mode', isLight);
+                localStorage.setItem('vintageModo', modo);
+            }
+
+            function carregarConfigurações() {
+                // Carrega tema salvo
+                const temaSalvo = localStorage.getItem('vintageTema') || 'classico';
+                aplicarTema(temaSalvo);
+                
+                // Atualizar botão de tema ativo
+                themeButtonsGroup.querySelectorAll('.theme-btn').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.theme === temaSalvo);
+                });
+
+                // Carrega modo salvo
+                const modoSalvo = localStorage.getItem('vintageModo') || 'dark';
+                const isLight = modoSalvo === 'light';
+                body.classList.toggle('light-mode', isLight);
+                
+                // Atualizar botões de modo ativos
+                darkModeBtn.classList.toggle('active', !isLight);
+                lightModeBtn.classList.toggle('active', isLight);
+            }
+
+            // Carrega as configurações ao iniciar
+            carregarConfigurações();
+
+            // Controle da Sidebar
+            function abrirSidebar() {
+                categorySidebar.classList.add('active');
+                sidebarOverlay.classList.add('active');
+                body.style.overflow = 'hidden';
+            }
+
+            function fecharSidebar() {
+                categorySidebar.classList.remove('active');
+                sidebarOverlay.classList.remove('active');
+                body.style.overflow = '';
+            }
+
+            sidebarToggleBtn.addEventListener('click', abrirSidebar);
+            sidebarCloseBtn.addEventListener('click', fecharSidebar);
+            sidebarOverlay.addEventListener('click', fecharSidebar);
+
+            /**
+             * CONSTRUIR MENU DE CATEGORIAS DA SIDEBAR DINAMICAMENTE
+             */
+            function construirMenuSidebar() {
+                sidebarCategoryList.innerHTML = '';
+
+                // Contagem por fabricante
+                const contagem = {};
+                let totalGeral = 0;
+                
+                Object.values(database).forEach(carro => {
+                    const fab = carro.fabricante || 'Outros';
+                    contagem[fab] = (contagem[fab] || 0) + 1;
+                    totalGeral++;
+                });
+
+                // Botão "Todos"
+                const btnTodos = document.createElement('button');
+                btnTodos.className = `category-item-btn ${!fabricanteSelecionado ? 'active' : ''}`;
+                btnTodos.innerHTML = `
+                    <span>Todos os Clássicos</span>
+                    <span class="category-count">${totalGeral}</span>
+                `;
+                btnTodos.addEventListener('click', () => {
+                    fabricanteSelecionado = '';
+                    atualizarBotoesSidebar();
+                    renderizarCatalogo();
+                    fecharSidebar();
+                });
+                sidebarCategoryList.appendChild(btnTodos);
+
+                // Botões para cada fabricante
+                Object.keys(contagem).sort().forEach(fab => {
+                    const btn = document.createElement('button');
+                    btn.className = `category-item-btn ${fabricanteSelecionado === fab ? 'active' : ''}`;
+                    btn.innerHTML = `
+                        <span>${fab}</span>
+                        <span class="category-count">${contagem[fab]}</span>
+                    `;
+                    btn.addEventListener('click', () => {
+                        fabricanteSelecionado = fab;
+                        atualizarBotoesSidebar();
+                        renderizarCatalogo();
+                        fecharSidebar();
+                    });
+                    sidebarCategoryList.appendChild(btn);
+                });
+            }
+
+            function atualizarBotoesSidebar() {
+                const botoes = sidebarCategoryList.querySelectorAll('.category-item-btn');
+                botoes.forEach(btn => {
+                    const textSpan = btn.querySelector('span');
+                    const text = textSpan ? textSpan.textContent : '';
+                    const isActive = (!fabricanteSelecionado && text === 'Todos os Clássicos') || (fabricanteSelecionado === text);
+                    btn.classList.toggle('active', isActive);
+                });
+            }
+
+            /**
+             * POPULAR FILTRO DE ANOS DISPONÍVEIS
+             */
+            function preencherFiltroAnos() {
+                const anosSet = new Set();
+                
+                Object.values(database).forEach(carro => {
+                    const partes = carro.ano.split('-');
+                    partes.forEach(anoStr => {
+                        const anoVal = parseInt(anoStr.trim());
+                        if (!isNaN(anoVal)) anosSet.add(anoVal);
+                    });
+                });
+
+                const anosOrdenados = Array.from(anosSet).sort((a, b) => b - a);
+
+                anosOrdenados.forEach(ano => {
+                    const opt = document.createElement('option');
+                    opt.value = ano;
+                    opt.textContent = ano;
+                    sidebarYearSelect.appendChild(opt);
+                });
+            }
+            
+            preencherFiltroAnos();
+            construirMenuSidebar();
+
+            sidebarYearSelect.addEventListener('change', (e) => {
+                anoSelecionado = e.target.value;
+                renderizarCatalogo();
+            });
+
+            /**
+             * CARROSSEL DE DESTAQUES (HIGHLIGHTS)
+             */
+            function inicializarCarrossel() {
+                const destaquesIds = ['fusca', 'opala_ss_1980', 'maverick', 'dodge_charger_1975', 'ferrari_348', 'landau'];
+                const carouselTrack = document.getElementById('carouselTrack');
+                const prevBtn = document.getElementById('carouselPrevBtn');
+                const nextBtn = document.getElementById('carouselNextBtn');
+                const trackContainer = document.querySelector('.carousel-track-container');
+
+                if (!carouselTrack || !trackContainer) return;
+
+                carouselTrack.innerHTML = '';
+                destaquesIds.forEach(id => {
+                    const carro = database[id];
+                    if (carro) {
+                        const imgUrl = normalizarCaminhoImagem(carro.fotos[0]);
+                        const card = document.createElement('div');
+                        card.className = 'carousel-card';
+                        card.setAttribute('role', 'button');
+
+                        card.innerHTML = `
+                            <a href="detalhes.html?carro=${id}" class="carousel-card-img-link">
+                                <img src="${imgUrl}" alt="${carro.nome}" onerror="this.onerror=null;this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 60%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23222%22/><text x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%23888%22 font-size=%2210%22>Imagem</text></svg>';">
+                                <div class="carousel-card-overlay">
+                                    <h4 class="carousel-card-title">${carro.nome}</h4>
+                                    <span class="carousel-card-year">${carro.ano}</span>
+                                </div>
+                            </a>
+                        `;
+                        carouselTrack.appendChild(card);
+                    }
+                });
+
+                const scrollAmount = 240;
+                nextBtn.addEventListener('click', () => {
+                    trackContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                });
+                prevBtn.addEventListener('click', () => {
+                    trackContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                });
+            }
+            
+            inicializarCarrossel();
+
+            /**
+             * SISTEMA DE BUSCA E AUTOCOMPLETE
+             */
+            function mostrarAutocomplete(termo) {
+                if (!termo) {
+                    autocompleteDropdown.style.display = 'none';
+                    return;
+                }
+
+                const termoLimpo = termo.toLowerCase();
+                const sugestoes = Object.entries(database).filter(([id, carro]) => {
+                    return carro.nome.toLowerCase().includes(termoLimpo) || 
+                           carro.ano.includes(termoLimpo);
+                }).slice(0, 5);
+
+                if (sugestoes.length === 0) {
+                    autocompleteDropdown.style.display = 'none';
+                    return;
+                }
+
+                autocompleteDropdown.innerHTML = '';
+                sugestoes.forEach(([id, carro]) => {
+                    const item = document.createElement('div');
+                    item.className = 'autocomplete-item';
+                    item.innerHTML = `
+                        <span class="autocomplete-name">${carro.nome}</span>
+                        <span class="autocomplete-year">${carro.ano}</span>
+                    `;
+                    item.addEventListener('click', () => {
+                        searchInput.value = carro.nome;
+                        buscaAtual = carro.nome;
+                        autocompleteDropdown.style.display = 'none';
+                        renderizarCatalogo();
+                    });
+                    autocompleteDropdown.appendChild(item);
+                });
+
+                autocompleteDropdown.style.display = 'block';
+            }
+
+            searchInput.addEventListener('input', (e) => {
+                buscaAtual = e.target.value;
+                mostrarAutocomplete(buscaAtual);
+                renderizarCatalogo();
+            });
+
+            // Fecha o autocomplete ao clicar fora
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.search-container')) {
+                    autocompleteDropdown.style.display = 'none';
+                }
+            });
+
+            function normalizarCaminhoImagem(caminho) {
+                if (!caminho) return caminho;
+                const semBarras = caminho.replace(/^\/+/, '');
+                return semBarras.startsWith('imagens/') ? `./${semBarras}` : semBarras;
+            }
+
+            /**
+             * RENDERIZAR CARD INDIVIDUAL
+             * Cria o elemento HTML de cada card de carro obedecendo a regra:
+             * Apenas a imagem é clicável e redireciona para detalhes.html?carro=ID.
+             */
+            function criarCardCarro(id, carro, index) {
+                const delay = (index * 0.05).toFixed(2);
+                const article = document.createElement('article');
+                article.className = 'car';
+                article.style.transitionDelay = `${delay}s`;
+
+                const imagemSrc = normalizarCaminhoImagem(carro.fotos[0]);
+
+                article.innerHTML = `
+                    <a href="detalhes.html?carro=${id}" class="img-link" title="Ver Detalhes de ${carro.nome}">
+                        <img src="${imagemSrc}" alt="${carro.nome}" loading="lazy"
+                             onerror="this.onerror=null;this.style.objectFit='contain';this.style.padding='20px';this.style.opacity='0.4';this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 60%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23222%22/><text x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%23888%22 font-size=%2210%22>Imagem indisponível</text></svg>';">
+                        <div class="img-overlay">Ver Detalhes</div>
+                    </a>
+                    <div class="car-info">
+                        <h2>${carro.nome}</h2>
+                        <div class="year">${carro.ano}</div>
+                        <p>${carro.descCurta}</p>
+                    </div>
+                `;
+                return article;
+            }
+
+            /**
+             * FILTRAR VEÍCULOS
+             * Aplica as regras de Busca e de Filtro por Ano.
+             */
+            function filtrarCarros() {
+                return Object.entries(database).filter(([id, carro]) => {
+                    // Filtro de Busca (Nome / Ano)
+                    const bateBusca = !buscaAtual || 
+                                     carro.nome.toLowerCase().includes(buscaAtual.toLowerCase()) ||
+                                     carro.ano.includes(buscaAtual);
+
+                    // Filtro de Ano (Quando modo categoria está ativo)
+                    let bateAno = true;
+                    if (modoCategoriaAtivo && anoSelecionado) {
+                        const anoInt = parseInt(anoSelecionado);
+                        const partes = carro.ano.split('-');
+                        if (partes.length === 2) {
+                            const inicio = parseInt(partes[0].trim());
+                            const fim = parseInt(partes[1].trim());
+                            bateAno = (anoInt >= inicio && anoInt <= fim);
+                        } else {
+                            const unico = parseInt(partes[0].trim());
+                            bateAno = (anoInt === unico);
+                        }
+                    }
+
+                    return bateBusca && bateAno;
+                });
+            }
+
+            /**
+             * RENDERIZAR CATÁLOGO COMPLETO
+             * Monta o grid regular ou agrupa em seções no Modo Categoria.
+             */
+            function renderizarCatalogo() {
+                catalogContainer.innerHTML = '';
+                const carrosFiltrados = filtrarCarros();
+
+                if (carrosFiltrados.length === 0) {
+                    catalogContainer.innerHTML = `
+                        <div class="no-results">
+                            Nenhum clássico encontrado para a combinação de filtros.
+                        </div>
+                    `;
+                    return;
+                }
+
+                if (modoCategoriaAtivo) {
+                    // Agrupar por fabricante
+                    const grupos = {};
+                    carrosFiltrados.forEach(([id, carro]) => {
+                        const fabricante = carro.fabricante || 'Outros';
+                        if (!grupos[fabricante]) grupos[fabricante] = [];
+                        grupos[fabricante].push({ id, carro });
+                    });
+
+                    // Renderizar cada seção de fabricante
+                    Object.entries(grupos).sort().forEach(([fabricante, listaCarros]) => {
+                        const section = document.createElement('section');
+                        section.className = 'category-group';
+
+                        const title = document.createElement('h2');
+                        title.className = 'category-title';
+                        title.textContent = fabricante;
+                        section.appendChild(title);
+
+                        const grid = document.createElement('div');
+                        grid.className = 'car-grid';
+
+                        listaCarros.forEach((item, index) => {
+                            grid.appendChild(criarCardCarro(item.id, item.carro, index));
+                        });
+
+                        section.appendChild(grid);
+                        catalogContainer.appendChild(section);
+                    });
+                } else {
+                    // Modo Normal (Grid unificado e fluido)
+                    const grid = document.createElement('div');
+                    grid.className = 'car-grid';
+
+                    carrosFiltrados.forEach(([id, carro], index) => {
+                        grid.appendChild(criarCardCarro(id, carro, index));
+                    });
+
+                    catalogContainer.appendChild(grid);
+                }
+
+                // Inicializa a revelação suave dos cards no scroll
+                initScrollReveal();
+            }
+
+            /**
+             * Scroll Reveal com IntersectionObserver
+             * Revela os cards suavemente conforme o usuário rola a página.
+             */
+            function initScrollReveal() {
+                const cards = catalogContainer.querySelectorAll('.car');
+                
+                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                    cards.forEach(card => {
+                        card.classList.add('reveal');
+                        card.style.transitionDelay = '0s';
+                    });
+                    return;
+                }
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const card = entry.target;
+                            card.classList.add('reveal');
+                            // Limpa o delay após a revelação para o hover ser imediato
+                            card.addEventListener('transitionend', () => {
+                                card.style.transitionDelay = '0s';
+                            }, { once: true });
+                            observer.unobserve(card);
+                        }
+                    });
+                }, {
+                    threshold: 0.05,
+                    rootMargin: '0px 0px -40px 0px' // Revela um pouco antes de entrar na tela
+                });
+
+                cards.forEach(card => {
+                    observer.observe(card);
+                });
+            }
+
+            // Primeira renderização da página
+            renderizarCatalogo();
+        });
+    </script>
+</body>
+
+</html>
