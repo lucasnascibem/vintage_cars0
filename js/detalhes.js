@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const carId = params.get('carro');
 
     if (!carId) {
-        window.location.href = 'carros antigos.html';
+        window.location.href = 'index.html';
         return;
     }
 
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!car) {
         alert('Carro não encontrado no catálogo!');
-        window.location.href = 'carros antigos.html';
+        window.location.href = 'index.html';
         return;
     }
 

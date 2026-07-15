@@ -292,7 +292,7 @@
 <body>
     <header class="main-header">
         <div class="header-inner">
-            <a href="carros antigos.html" class="back-btn" id="backBtn">
+            <a href="index.html" class="back-btn" id="backBtn">
                 <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
                 <span>Voltar ao Catálogo</span>
             </a>
@@ -343,7 +343,7 @@
             const params = new URLSearchParams(window.location.search);
             const carId = params.get('carro');
 
-            if (!carId) { window.location.href = 'carros antigos.html'; return; }
+            if (!carId) { window.location.href = 'index.html'; return; }
 
             // Tenta primeiro carrosDados (banco embutido completo), depois carsData (legado)
             let carro = null;
@@ -358,7 +358,7 @@
 
             if (!carro) {
                 alert('Veículo não encontrado.');
-                window.location.href = 'carros antigos.html';
+                window.location.href = 'index.html';
                 return;
             }
 
